@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import {TypegooseModule} from 'nestjs-typegoose';
 import {ConfigModule, ConfigService} from '@nestjs/config';
 import { getMongoConfig } from './config/mongo.config';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
