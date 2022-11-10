@@ -16,22 +16,22 @@ export class UserService {
         return this.UserModel.aggregate()
         .match({_id})
         .lookup({
-            from:'Video',
+            from:'Post',
             foreignField:'user',
             localField:'_id',
-            as:'videos'
+            as:'posts'
         }).addFields({
-            videosCount:{
-                $size:'$videos'
+            postsCount:{
+                $size:'$posts'
             }
         })
-        .project({__v:0, password:0,videos:0})
+        .project({__v:0,posts:0})
         .exec()
         .then((data=>data[0]))
     }
 
     async byId(_id:Types.ObjectId){
-        const user=await this.UserModel.findById(_id,'-password -__v');
+        const user=await this.UserModel.findById(_id,'-__v');
         if(!user) throw new UnauthorizedException('User not found');
 
         return user;
@@ -39,31 +39,16 @@ export class UserService {
 
     async updateProfile(_id:Types.ObjectId,dto:UserDto){
         const user = await this.byId(_id)
-
-        const isSameUser=await this.UserModel.findOne({email:dto.email})
-        if(isSameUser && String(_id)===String(isSameUser._id)) throw new NotFoundException('Email is busy');
-
-        if(dto.password){
-            const salt = await genSalt(10)
-            user.password=await hash(dto.password, salt)
-        }
-
         
-        user.email=dto.email;
-        user.password=dto.password;
-        user.description=dto.description;
-        user.location=dto.location;
+        
+        user.name=dto.name;
+        user.city=dto.city;
+        user.birthDate=dto.birthDate;
+        user.gender=dto.gender;
         user.avatarPath=dto.avatarPath;
 
         return await user.save();
 
     }
 
-    async getMostPopular(){
-        return this.UserModel.find({subscribersCount:{$gt:0}}, '-password -__v').sort({subscribersCount:-1}).exec()
-    }
-
-    async getAll(){
-        return this.UserModel.find({}, '-password -__v').exec()
-    }
 }
