@@ -37,16 +37,4 @@ export class UserController {
   async updateUser(@Param('id', IdValidationPipe) id:Types.ObjectId, @Body() dto: UserDto){
     return this.userService.updateProfile(id,dto)
   }
-
-  @Get('most-popular')
-  async getMostPopular(){
-    return this.userService.getMostPopular();
-  }
-
-  @Get()
-  async getUsers(){
-    return this.userService.getAll();
-  }
-
- 
 }
