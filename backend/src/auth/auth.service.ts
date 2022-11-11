@@ -1,10 +1,4 @@
-import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { ModelType } from '@typegoose/typegoose/lib/types';
-import { compare, genSalt, hash } from 'bcryptjs';
-import { InjectModel } from 'nestjs-typegoose';
-import { UserModel } from 'src/user/user.model';
-import { AuthDto } from './auth.dto';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuthService {
@@ -17,5 +11,9 @@ export class AuthService {
             message:'User information from google',
             user: req.user
         }
+    }
+
+    googleLogout(req){
+        req.logout()
     }
 }
