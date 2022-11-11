@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes, ValidationPipe, HttpCode, Put } from '@nestjs/common';
 import { isConstructor } from '@typegoose/typegoose/lib/internal/utils';
 import { Types} from 'mongoose';
-import { Auth } from 'src/auth/decorators/auth.decorators';
+import { Auth } from 'src/auth/jwt/auth.decorators';
 import { IdValidationPipe } from 'src/pipes/id.validation.pipe';
 import { CurrentUser } from './decorators/user.decorator';
 import { UserDto } from './user.dto';

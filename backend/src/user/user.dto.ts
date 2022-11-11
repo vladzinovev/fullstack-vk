@@ -19,3 +19,4 @@ export class UserDto {
     @IsString()
     avatarPath:string
 }
+

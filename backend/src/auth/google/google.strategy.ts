@@ -4,16 +4,15 @@ import { ConfigService } from '@nestjs/config';
 
 
 import { Inject, Injectable } from '@nestjs/common';
-import { AuthService } from '../auth.service';
-
-
+import { AuthService } from '../jwt/auth.service';
+import { IGoogleProfile, IResGoogleUser } from '../jwt/auth.interface';
 
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
 
   constructor(
     private readonly configService: ConfigService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
   ) {
     super({
       clientID: configService.get('GOOGLE_CLIENT_ID'),
@@ -23,14 +22,12 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     });
   }
 
-  async validate (accessToken: string, refreshToken: string, profile: any, done: VerifyCallback): Promise<any> {
-    const { name, emails, photos } = profile
-    return {
+  async validate (accessToken: string, refreshToken: string, profile: IGoogleProfile){
+    const { displayName, emails, photos } = profile
+    return this.authService.validateUser({
       email: emails[0].value,
-      firstName: name.givenName,
-      lastName: name.familyName,
-      picture: photos[0].value,
-      accessToken
-    }
+      name: displayName,
+      avatarPath: photos[0].value,
+    })
   }
 }
