@@ -1,11 +1,9 @@
+import Home from '@/components/screens/home/Home';
 import { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
 
-const Home:NextPage=()=> {
+const HomePage:NextPage=()=> {
   return (
-    
+    <Home/>
   )
 }
-export default Home;
+export default HomePage;

@@ -1,10 +1,11 @@
 import { IUser } from "./user.interface";
 
 export interface IPost{
-    author:IUser
+    _id:string
+    user:IUser
     createdAt:string
     content:string
-    images?:string[]
+    image?:string
 }
 
 
