@@ -1,9 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import {getContentType} from './api.utils'
 
-export const getContentType=()=>({
-    'Content-Type':'application/json',
-})
 
 //нужен чтобы дедлать запросы без авторизации
 export const axiosClassic=axios.create({
