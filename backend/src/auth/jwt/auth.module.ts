@@ -3,7 +3,6 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { GoogleStrategy } from '../google/google.strategy';
 import { ConfigModule } from '@nestjs/config';
-import { SessionSerializer } from '../serializer';
 import { TypegooseModule } from 'nestjs-typegoose';
 import { UserModel } from 'src/user/user.model';
 
@@ -13,7 +12,6 @@ import { UserModel } from 'src/user/user.model';
   providers: [
     AuthService, 
     GoogleStrategy,
-    SessionSerializer,
     {
       provide: 'AUTH_SERVICE',
       useClass: AuthService,

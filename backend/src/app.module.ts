@@ -7,6 +7,7 @@ import { getMongoConfig } from './config/mongo.config';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/jwt/auth.module';
 import { PassportModule } from '@nestjs/passport';
+import { GoogleAuthModule } from './auth/google/google-auth.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { PassportModule } from '@nestjs/passport';
       useFactory:getMongoConfig,
     }),
     UserModule,
+    GoogleAuthModule
   ],
   controllers: [AppController],
   providers: [AppService],

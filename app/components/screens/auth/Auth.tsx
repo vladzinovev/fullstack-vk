@@ -26,7 +26,7 @@ const Auth:FC=()=>{
                     
                 }
                 size='large'
-                onClick={()=>push('')}
+                onClick={()=>push(`https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fgoogle-auth&scope=email%20profile&client_id=${process.env.GOOGLE_CLIENT_ID}&flowName=GeneralOAuthFlow`)}
             >
                 Sign in with google
             </Button>
