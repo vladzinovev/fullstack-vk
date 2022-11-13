@@ -1,5 +1,6 @@
 import { useAuth } from "@/hooks/useAuth";
 import { Avatar, Button, Card, Col, Row } from "antd";
+import { users } from "./dataUser";
 
 const User=()=>{
     const {user}=useAuth();

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import Menu from "./Menu";
 import User from "./User";
-import UserItems from "./UserItems";
+import UserItems from "./UserItems/UserItems";
 
 const Sidebar:FC=()=>{
     return(

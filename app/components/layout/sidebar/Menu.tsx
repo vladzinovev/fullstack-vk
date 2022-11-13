@@ -1,4 +1,6 @@
 import { Card, List } from "antd";
+import { useRouter } from "next/router";
+import { menu } from "./dataMenu";
 
 const Menu=()=>{
     const {push}=useRouter();
