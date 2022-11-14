@@ -1,13 +1,17 @@
 import { useAuth } from "@/hooks/useAuth";
 import { Col, Row } from "antd";
+import Head from "next/head";
 import { FC, PropsWithChildren } from "react"
 import Header from "./header/Header";
 import Sidebar from "./sidebar/Sidebar";
 
-const Layout:FC<PropsWithChildren<unknown>>=({children})=>{
+const Layout:FC<PropsWithChildren<{title:string}>>=({children, title})=>{
     const {user} = useAuth();
     return (
         <>
+            <Head>
+                <title>{title}</title>
+            </Head>
             <Header/>
             <Row gutter={[5,2]} >
                 {user && (

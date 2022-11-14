@@ -28,7 +28,7 @@ const AuthProvider:FC<PropsWithChildren<unknown>>=({children})=>{
     useEffect(()=>{
         const accessToken = Cookies.get('accessToken')
         if(accessToken && !user){
-            //AuthService.logout()
+            AuthService.logout()
             setUser(null)
         }
     },[pathname])

@@ -16,7 +16,7 @@ const User=()=>{
         >
             <Row>
                 <Col span={3}>
-                    <Avatar alt='' src={users[0].avatar}/>
+                    <Avatar alt='' src={users?.avatarPath}/>
                 </Col>
                 <Col span={9}>
                     <div>{users[0].name || 'Буз имени'}</div>

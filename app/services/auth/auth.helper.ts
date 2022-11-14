@@ -1,9 +1,7 @@
+import { IUser } from "@/types/user.interface"
 import Cookies from "js-cookie"
 
-export type TypeUser ={
-    _id:string
-    email:string
-} | null
+export type TypeUser=IUser | null
 
 export interface IAuthData{
     user:TypeUser

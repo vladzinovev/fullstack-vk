@@ -5,18 +5,22 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { Card, notification, Spin } from "antd";
 import { errorCatch } from "api/api.utils";
+import { useAuth } from "@/hooks/useAuth";
 
 const GoogleAuthPage:NextPage=()=>{
-    const {query}=useRouter();
+    const {setUser}=useAuth();
+    const {query,push}=useRouter();
     const code = query?.code
     const {mutate}=useMutation(
         'send code token',
         (code:string)=>AuthService.LoginGoogle(code),
         {
-            onSuccess(){
+            async onSuccess(user){
                 notification.success({
                     message:'Auth success'
                 })
+                setUser && setUser(user)
+                await push('/')
             },
             onError(error){
                 notification.error({
@@ -38,3 +42,5 @@ const GoogleAuthPage:NextPage=()=>{
     )
 }
 export default GoogleAuthPage;
+
+

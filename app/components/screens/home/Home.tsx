@@ -5,10 +5,13 @@ import { FC } from "react"
 
 const Home:FC=()=>{
     return (
-        <div>
-            <AddPost/>
-            <Posts/>
-        </div>
+        <Layout title='Главная'>
+            <div>
+                <AddPost/>
+                <Posts/>
+            </div>
+        </Layout>
+        
     )
 }
 export default Home;
