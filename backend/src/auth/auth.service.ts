@@ -1,5 +1,7 @@
+import { HttpService } from '@nestjs/axios';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from 'nestjs-config';
 import { InjectModel } from 'nestjs-typegoose';
 import { UserModel } from 'src/user/user.model';
 import { ModelType } from 'typegoose';
@@ -9,7 +11,10 @@ import { GoogleCodeDto } from './dto/google-code.dto';
 @Injectable()
 export class AuthService {
 
-    constructor(@InjectModel(UserModel) private readonly UserModel:ModelType<UserModel>,private readonly jwtService: JwtService){}
+    constructor(@InjectModel(UserModel) private readonly UserModel:ModelType<UserModel>,private readonly jwtService: JwtService,
+    private readonly httpService: HttpService,
+    private readonly configService: ConfigService
+    ){}
 
     async validateUser(details: IResGoogleUser) {
         const user = await this.UserModel.findOne({ email:details.email });
