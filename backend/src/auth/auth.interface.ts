@@ -1,21 +1,12 @@
-type TypeEmail={
-    value:string
-    verified:boolean
-}
-
-type TypePhoto={
-    value:string
-}
-
 export interface IGoogleProfile{
-  id: string;
-  displayName: string;
-  name: {
-    familyName:string
-    givenName:string
-  };
-  emails: TypeEmail[];
-  photos: TypePhoto[];
+  sub: string;
+  email: string;
+  name:string 
+  familyName:string
+  givenName:string
+  locale:string
+  picture: string;
+  email_verified:boolean;
 }
 
 export interface IResGoogleUser{
