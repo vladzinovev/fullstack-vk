@@ -5,9 +5,8 @@ import {TypegooseModule} from 'nestjs-typegoose';
 import {ConfigModule, ConfigService} from '@nestjs/config';
 import { getMongoConfig } from './config/mongo.config';
 import { UserModule } from './user/user.module';
-import { AuthModule } from './auth/jwt/auth.module';
-import { PassportModule } from '@nestjs/passport';
-import { GoogleAuthModule } from './auth/google/google-auth.module';
+import { AuthModule } from './auth/auth.module';
+import { PassportModule } from '@nestjs/passport'
 
 @Module({
   imports: [
@@ -20,7 +19,6 @@ import { GoogleAuthModule } from './auth/google/google-auth.module';
       useFactory:getMongoConfig,
     }),
     UserModule,
-    GoogleAuthModule
   ],
   controllers: [AppController],
   providers: [AppService],

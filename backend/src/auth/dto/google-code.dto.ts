@@ -1,7 +1,7 @@
 
 import { IsString } from "class-validator"
 
-export class AuthDto {
+export class GoogleCodeDto {
 
     @IsString()
     code:string

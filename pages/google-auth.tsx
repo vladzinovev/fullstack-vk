@@ -8,10 +8,10 @@ import { errorCatch } from "api/api.utils";
 
 const GoogleAuthPage:NextPage=()=>{
     const {query}=useRouter();
-    const code = String(query?.code)
+    const code = query?.code
     const {mutate}=useMutation(
         'send code token',
-        ()=>AuthService.LoginGoogle(code),
+        (code:string)=>AuthService.LoginGoogle(code),
         {
             onSuccess(){
                 notification.success({
@@ -28,7 +28,7 @@ const GoogleAuthPage:NextPage=()=>{
     )
 
     useEffect(()=>{
-        if(code) mutate()
+        if(code) mutate(String(code))
     },[code, mutate])
 
     return(
