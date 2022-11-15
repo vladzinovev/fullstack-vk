@@ -3,21 +3,15 @@ import { IsEmail, IsEnum, IsString } from "class-validator"
 import { EnumGender } from "src/user/user.interface"
 
 
-export class PostDto {
+export class MessageDto {
 
     @IsString()
-    name:string
+    text:string
 
     @IsString()
-    birthDate:string
+    userFromId:string
 
     @IsString()
-    city:string
-    
-    @IsEnum(EnumGender)
-    gender:string
-
-    @IsString()
-    avatarPath:string
+    userToId:string
 }
 

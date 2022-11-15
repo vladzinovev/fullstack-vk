@@ -7,6 +7,12 @@ import { getMongoConfig } from './config/mongo.config';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { PassportModule } from '@nestjs/passport'
+import { MessageModel } from './message/message.model';
+import { PostModel } from './post/post.model';
+import { CommentModel } from './comment/comment.model';
+import { ConversationModel } from './conversation/conversation.model';
+import { LogLikesModel } from './log-likes/log-likes.model';
+
 
 @Module({
   imports: [
@@ -19,6 +25,11 @@ import { PassportModule } from '@nestjs/passport'
       useFactory:getMongoConfig,
     }),
     UserModule,
+    //ConversationModel,
+    MessageModel,
+    PostModel,
+    CommentModel,
+    LogLikesModel
   ],
   controllers: [AppController],
   providers: [AppService],

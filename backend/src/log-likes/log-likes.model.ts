@@ -1,33 +1,16 @@
 import { prop, Ref } from '@typegoose/typegoose';
 import {Base, TimeStamps} from '@typegoose/typegoose/lib/defaultClasses';
 import { EnumGender } from 'src/user/user.interface';
+import { UserModel } from 'src/user/user.model';
 
-export interface PostModel extends Base{}
+export interface LogLikesModel extends Base{}
 
-export class PostModel extends TimeStamps{
+export class LogLikesModel extends TimeStamps{
 
-    @prop({unique:true})
-    email:string
+    @prop({ref:()=>PostModel})
+    post:Ref<PostModel>
 
-    @prop()
-    name:string
-
-    @prop({default:false})
-    isVerified:boolean
-
-    @prop()
-    birthDate:string
-
-    @prop()
-    city:string
-    
-    @prop({enum: EnumGender})
-    gender:string
-
-    @prop()
-    avatarPath:string
-
-    @prop({default:[], ref:()=>PostModel})
-    friends:Ref<PostModel>[]
+    @prop({ref:()=>UserModel})
+    user:Ref<UserModel>
 
 }

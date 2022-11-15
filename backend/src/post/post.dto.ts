@@ -6,18 +6,10 @@ import { EnumGender } from "src/user/user.interface"
 export class PostDto {
 
     @IsString()
-    name:string
+    content:string
 
     @IsString()
-    birthDate:string
+    image?:string
 
-    @IsString()
-    city:string
-    
-    @IsEnum(EnumGender)
-    gender:string
-
-    @IsString()
-    avatarPath:string
 }
 
