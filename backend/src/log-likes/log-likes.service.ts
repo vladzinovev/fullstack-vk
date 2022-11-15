@@ -1,0 +1,33 @@
+import { Injectable } from "@nestjs/common";
+import { Types } from "mongoose";
+import { InjectModel } from "nestjs-typegoose";
+import { ModelType } from "typegoose";
+import { LogLikesModel } from "./log-likes.model";
+
+@Injectable()
+export class LogLikesService{
+    constructor(
+        @InjectModel(LogLikesModel) 
+        private readonly LogLikesModel:ModelType<LogLikesModel>
+    ) {}
+
+    async checkExists( userId:Types.ObjectId, postId:Types.ObjectId){
+        return this.LogLikesModel.exists({post:postId, user:userId})
+        .exec()
+    }
+
+    async getAllCount( postId:Types.ObjectId){
+        return this.LogLikesModel.find({post:postId})
+        .count()
+        .exec()
+    }
+
+    async create(userId:Types.ObjectId, postId:Types.ObjectId){
+        return this.LogLikesModel.create({post:postId, user:userId})
+    }
+
+    async delete(userId:Types.ObjectId, postId:Types.ObjectId){
+        return this.LogLikesModel.findOneAndDelete({post:postId, user:userId})
+        .exec()
+    }
+}
