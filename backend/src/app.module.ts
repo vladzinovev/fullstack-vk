@@ -10,7 +10,7 @@ import { PassportModule } from '@nestjs/passport'
 import { MessageModel } from './message/message.model';
 import { PostModel } from './post/post.model';
 import { CommentModel } from './comment/comment.model';
-import { ConversationModel } from './conversation/conversation.model';
+//import { ConversationModel } from './conversation/conversation.model';
 import { LogLikesModel } from './log-likes/log-likes.model';
 
 

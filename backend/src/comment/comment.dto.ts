@@ -1,23 +1,14 @@
 import { prop } from "@typegoose/typegoose"
 import { IsEmail, IsEnum, IsString } from "class-validator"
-import { EnumGender } from "src/user/user.interface"
+import { IsObjectId } from "class-validator-mongo-object-id"
 
 
-export class PostDto {
-
-    @IsString()
-    name:string
+export class CommentDto {
 
     @IsString()
-    birthDate:string
+    message:string
 
-    @IsString()
-    city:string
-    
-    @IsEnum(EnumGender)
-    gender:string
-
-    @IsString()
-    avatarPath:string
+    @IsObjectId()
+    postId:string
 }
 
