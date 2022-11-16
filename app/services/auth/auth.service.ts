@@ -1,6 +1,6 @@
 import { IUser } from "@/types/user.interface"
 import { axiosClassic } from "api/interceptors"
-import { IAuthData, saveToStorage } from "./auth.helper"
+import { IAuthData, removeTokenFromStorage, saveToStorage } from "./auth.helper"
 
 export const AuthService={
     async LoginGoogle(code:string){
@@ -10,7 +10,7 @@ export const AuthService={
        if (response.data.accessToken) saveToStorage(response.data)
 
        return response.data.user
-    }
+    },
 
     logout(){
         removeTokenFromStorage()

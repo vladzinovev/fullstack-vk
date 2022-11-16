@@ -1,9 +1,10 @@
 import { useAuth } from "@/hooks/useAuth";
+import { AuthService } from "@/services/auth/auth.service";
 import { Avatar, Button, Card, Col, Row } from "antd";
 import { users } from "./dataUser";
 
 const User=()=>{
-    const {user}=useAuth();
+    const {user,setUser}=useAuth();
     return(
         <Card 
             style={{
@@ -16,13 +17,16 @@ const User=()=>{
         >
             <Row>
                 <Col span={3}>
-                    <Avatar alt='' src={users?.avatarPath}/>
+                    <Avatar alt='' src={user?.avatarPath}/>
                 </Col>
                 <Col span={9}>
-                    <div>{users[0].name || 'Буз имени'}</div>
+                    <div>{user?.name || 'Буз имени'}</div>
                 </Col>
             </Row>
-            <Button type='dashed' onClick={()=>{}}>
+            <Button type='dashed' onClick={()=>{
+                AuthService.logout()
+                setUser && setUser(null)
+            }}>
                 Выйти
             </Button>
 

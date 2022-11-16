@@ -5,7 +5,7 @@ import { IdValidationPipe } from "src/pipes/id.validation.pipe";
 import { CurrentUser } from "src/user/decorators/user.decorator";
 import { LogLikesService } from "./log-likes.service";
 
-@Controller('comment')
+@Controller('log-likes')
 export class LogLikesController{
     constructor(private readonly logLikesService: LogLikesService){}
 

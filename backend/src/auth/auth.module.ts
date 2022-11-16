@@ -7,6 +7,7 @@ import { UserModel } from 'src/user/user.model';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { getJWTConfig } from 'src/config/jwt.config';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   controllers: [AuthController],
@@ -27,7 +28,8 @@ import { getJWTConfig } from 'src/config/jwt.config';
       imports:[ConfigModule],
       inject:[ConfigModule],
       useFactory:getJWTConfig
-    })
+    }),
+    HttpModule
   ],
 })
 export class AuthModule {}

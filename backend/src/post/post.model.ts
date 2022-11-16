@@ -14,6 +14,6 @@ export class PostModel extends TimeStamps{
     image?:string
 
     @prop({ ref:()=>UserModel})
-    user:Ref<UserModel>[]
+    user:Ref<UserModel>
 
 }

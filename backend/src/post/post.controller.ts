@@ -6,9 +6,9 @@ import { CurrentUser } from "src/user/decorators/user.decorator";
 import { PostDto } from "./post.dto";
 import { PostService } from "./post.service";
 
-@Controller('comment')
+@Controller('post')
 export class PostController{
-    constructor(private readonly commentService: PostService){}
+    constructor(private readonly postService: PostService){}
 
     @Get()
     async getAll(){

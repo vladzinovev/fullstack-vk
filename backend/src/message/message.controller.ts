@@ -6,11 +6,11 @@ import { CurrentUser} from "src/user/decorators/user.decorator";
 import { MessageDto } from "./message.dto";
 import { MessageService } from "./message.service";
 
-@Controller('comment')
+@Controller('message')
 export class MessageController{
     constructor(private readonly messageService: MessageService){}
 
-    @Get('recent')
+    @Get('recent-list')
     @Auth()
     async getRecentMessage(@CurrentUser('_id') userId:Types.ObjectId){
         return this.messageService.byUserFromId(userId);

@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { Types } from "mongoose";
 import { InjectModel } from "nestjs-typegoose";
+import { ModelType } from "typegoose";
 import { CommentDto } from "./comment.dto";
 import { CommentModel } from "./comment.model";
 

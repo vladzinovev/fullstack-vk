@@ -6,7 +6,10 @@ import { InjectModel } from 'nestjs-typegoose';
 import { firstValueFrom, lastValueFrom, map } from 'rxjs';
 import { UserModel } from 'src/user/user.model';
 import { ModelType } from 'typegoose';
-import { IGoogleProfile, IResGoogleUser } from './auth.interface';
+import { IGoogleProfile, I
+    static logout() {
+        throw new Error("Method not implemented.");
+    }ResGoogleUser } from './auth.interface';
 import { GoogleCodeDto } from './dto/google-code.dto';
 
 @Injectable()

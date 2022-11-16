@@ -2,6 +2,7 @@ import { createContext, Dispatch, FC, PropsWithChildren, SetStateAction, useEffe
 import Cookies from 'js-cookie';
 import { TypeUser } from "../services/auth/auth.helper";
 import { useRouter } from "next/router";
+import { AuthService } from "@/services/auth/auth.service";
 
 interface IContext{
     user: TypeUser

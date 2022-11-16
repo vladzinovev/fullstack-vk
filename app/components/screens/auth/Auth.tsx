@@ -17,7 +17,7 @@ const Auth:FC=()=>{
     
     return(
         
-        <Layout title='Диалоги'>
+        <Layout title='Вход в систему'>
             <Card className={styles.form}>
                 <Typography.Title>Google login</Typography.Title>
                 <Button 

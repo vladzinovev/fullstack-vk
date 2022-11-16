@@ -1,13 +1,13 @@
 import Layout from "@/components/layout/Layout";
 import { FC } from "react"
 
-const Friends:FC=()=>{
+const Conversation:FC=()=>{
     return (
-        <Layout title='Друзья'>
+        <Layout title='Диалог'>
             <div>
-                Friends
+                Conversations
             </div>
         </Layout>
     )
 }
-export default Friends;
+export default Conversation;
