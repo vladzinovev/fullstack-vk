@@ -35,12 +35,11 @@ export class LogLikesController{
     }
 
     @HttpCode(200)
-    @Delete(':postId')
+    @Delete(':id')
     @Auth()
     async deleteLog(
-        @Param('postId',IdValidationPipe) postId:Types.ObjectId,
-        @CurrentUser('_id') userId:Types.ObjectId
+        @Param('id',IdValidationPipe) id:string
     ){
-        return this.commentService.create(userId,postId)
+        return this.LogLikesService.delete(id)
     }
 }
