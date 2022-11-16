@@ -22,6 +22,11 @@ export class UserController {
     return this.userService.getUser(new Types.ObjectId(id));
   }
 
+  @Get('find/:searchTerm')
+  async findUser(@Param('searchTerm',IdValidationPipe) searchTerm:string){
+    return this.userService.findUser(searchTerm);
+  }
+
   @UsePipes(new ValidationPipe())
   @HttpCode(200)
   @Put('profile')
@@ -36,5 +41,14 @@ export class UserController {
   @Auth() //Admin
   async updateUser(@Param('id', IdValidationPipe) id:Types.ObjectId, @Body() dto: UserDto){
     return this.userService.updateProfile(id,dto)
+  }
+
+  @UsePipes(new ValidationPipe())
+  @HttpCode(200)
+  @Patch(':frinedId')
+  @Auth() //Admin
+  async toggleFriend(@CurrentUser('_id') currentUserId:Types.ObjectId,
+    @Param('friendId', IdValidationPipe) friendId:Types.ObjectId){
+    return this.userService.toggleFriend(currentUserId,friendId)
   }
 }

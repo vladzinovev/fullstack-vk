@@ -39,7 +39,6 @@ export class UserService {
     async updateProfile(_id:Types.ObjectId,dto:UserDto){
         const user = await this.byId(_id)
         
-        
         user.name=dto.name;
         user.city=dto.city;
         user.birthDate=dto.birthDate;
@@ -47,7 +46,37 @@ export class UserService {
         user.avatarPath=dto.avatarPath;
 
         return await user.save();
-
     }
 
+    async toggleFriends(currentUserId:Types.ObjectId,friendId:Types.ObjectId){
+        const currentUser=await this.byId(currentUserId);
+        const friend=await this.byId(friendId);
+
+        if(currentUser.friends.includes(friendId)){
+            currentUser.friends=currentUser.friends.filter((id)=>id !== friendId)
+            friend.friends=friend.friends.filter((id)=>id !== currentUserId)
+        } else {
+            currentUser.friends=[...currentUser.friends, friendId]
+            friend.friends=[...friend.friends, currentUserId]
+        }
+
+        await currentUser.save()
+        await friend.save()
+
+        return true
+    }
+
+    async findUser(searchTerm:string){
+        return this.UserModel.find({
+            $or:[
+                {
+                    name:new RegExp(searchTerm,'i')
+                }
+            ]
+        })
+        .select('-_v')
+        .sort({createdAt:'desc'})
+        .populate('user','name avatarPath isVerified')
+        .exec()
+    }
 }
