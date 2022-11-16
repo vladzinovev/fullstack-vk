@@ -7,8 +7,7 @@ import { LogLikesService } from "./log-likes.service";
 
 @Controller('comment')
 export class LogLikesController{
-    LogLikesService: any;
-    constructor(private readonly commentService: LogLikesService){}
+    constructor(private readonly logLikesService: LogLikesService){}
 
     @Get('check-exists/:postId')
     @Auth()
@@ -16,12 +15,12 @@ export class LogLikesController{
         @Param('postId',IdValidationPipe) postId:Types.ObjectId,
         @CurrentUser('_id') userId: Types.ObjectId
     ){
-        return this.LogLikesService.checkExists(userId,postId);
+        return this.logLikesService.checkExists(userId,postId);
     }
 
     @Get('get-count/:postId')
     async getAllCount(@Param('postId',IdValidationPipe) postId:Types.ObjectId){
-        return this.LogLikesService.getAllCount(postId);
+        return this.logLikesService.getAllCount(postId);
     }
 
     @HttpCode(200)
@@ -31,15 +30,16 @@ export class LogLikesController{
         @Param('postId',IdValidationPipe) postId:Types.ObjectId,
         @CurrentUser('_id') userId:Types.ObjectId
     ){
-        return this.LogLikesService.create(userId,postId)
+        return this.logLikesService.create(userId,postId)
     }
 
     @HttpCode(200)
-    @Delete(':id')
+    @Delete(':postId')
     @Auth()
     async deleteLog(
-        @Param('id',IdValidationPipe) id:string
+        @Param('postId',IdValidationPipe) postId:Types.ObjectId,
+        @CurrentUser('_id') userId:Types.ObjectId
     ){
-        return this.LogLikesService.delete(id)
+        return this.logLikesService.delete(userId,postId)
     }
 }
