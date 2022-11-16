@@ -12,13 +12,6 @@ export class MessageService{
         private readonly MessageModel:ModelType<MessageModel>
     ) {}
 
-    async byUserFromId( userFromId:Types.ObjectId){
-        return this.MessageModel.find({userFrom:userFromId})
-        .populate('userFrom', 'avatarPath name')
-        .populate('userTo', 'avatarPath name')
-        .exec()
-    }
-
     async byUserToId( userFromId:Types.ObjectId,userToId:Types.ObjectId){
         return this.MessageModel.find({userFrom:userFromId,userTo:userToId})
         .populate('userFrom', 'avatarPath')

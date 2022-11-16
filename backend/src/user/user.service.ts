@@ -12,7 +12,7 @@ export class UserService {
     ) {}
 
     async getUser(_id:Types.ObjectId){
-        return this.UserModel.aggregate()
+        const user = await this.UserModel.aggregate()
         .match({_id})
         .lookup({
             from:'Post',
@@ -25,8 +25,12 @@ export class UserService {
             }
         })
         .project({__v:0,posts:0})
-        .exec()
-        .then((data=>data[0]))
+
+        await this.UserModel.populate(user,{path:'friends', select:'name avatarPath'})
+        /* .exec()
+        .then((data=>data[0])) */
+
+        return user[0]
     }
 
     async byId(_id:Types.ObjectId){
@@ -48,13 +52,13 @@ export class UserService {
         return await user.save();
     }
 
-    async toggleFriends(currentUserId:Types.ObjectId,friendId:Types.ObjectId){
+    async toggleFriend(currentUserId:Types.ObjectId,friendId:Types.ObjectId){
         const currentUser=await this.byId(currentUserId);
         const friend=await this.byId(friendId);
 
         if(currentUser.friends.includes(friendId)){
-            currentUser.friends=currentUser.friends.filter((id)=>id !== friendId)
-            friend.friends=friend.friends.filter((id)=>id !== currentUserId)
+            currentUser.friends=currentUser.friends.filter((id)=>String(id) !== String(friendId))
+            friend.friends=friend.friends.filter((id)=>String(id) !== String(currentUserId))
         } else {
             currentUser.friends=[...currentUser.friends, friendId]
             friend.friends=[...friend.friends, currentUserId]
@@ -76,7 +80,7 @@ export class UserService {
         })
         .select('-_v')
         .sort({createdAt:'desc'})
-        .populate('user','name avatarPath isVerified')
+        .populate('name avatarPath isVerified')
         .exec()
     }
 }

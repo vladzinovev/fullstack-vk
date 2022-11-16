@@ -46,7 +46,7 @@ export class UserController {
   @UsePipes(new ValidationPipe())
   @HttpCode(200)
   @Patch(':frinedId')
-  @Auth() //Admin
+  @Auth()
   async toggleFriend(@CurrentUser('_id') currentUserId:Types.ObjectId,
     @Param('friendId', IdValidationPipe) friendId:Types.ObjectId){
     return this.userService.toggleFriend(currentUserId,friendId)

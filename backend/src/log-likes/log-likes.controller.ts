@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, HttpCode, Param, Post } from "@nestjs/common";
+import { Controller, Delete, Get, HttpCode, Param, Post, Put } from "@nestjs/common";
 import { Types } from "mongoose";
 import { Auth } from "src/auth/auth.decorators";
 import { IdValidationPipe } from "src/pipes/id.validation.pipe";
@@ -24,22 +24,14 @@ export class LogLikesController{
     }
 
     @HttpCode(200)
-    @Post(':postId')
+    @Put(':postId')
     @Auth()
-    async createLog(
+    async toggleLog(
         @Param('postId',IdValidationPipe) postId:Types.ObjectId,
         @CurrentUser('_id') userId:Types.ObjectId
     ){
-        return this.logLikesService.create(userId,postId)
+        return this.logLikesService.toggle(userId,postId)
     }
 
-    @HttpCode(200)
-    @Delete(':postId')
-    @Auth()
-    async deleteLog(
-        @Param('postId',IdValidationPipe) postId:Types.ObjectId,
-        @CurrentUser('_id') userId:Types.ObjectId
-    ){
-        return this.logLikesService.delete(userId,postId)
-    }
+   
 }

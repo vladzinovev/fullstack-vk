@@ -14,6 +14,7 @@ export class LogLikesService{
     async checkExists( userId:Types.ObjectId, postId:Types.ObjectId){
         return this.LogLikesModel.exists({post:postId, user:userId})
         .exec()
+        .then((data)=>!!data)
     }
 
     async getAllCount( postId:Types.ObjectId){
@@ -22,12 +23,17 @@ export class LogLikesService{
         .exec()
     }
 
-    async create(userId:Types.ObjectId, postId:Types.ObjectId){
-        return this.LogLikesModel.create({post:postId, user:userId})
+    async toggle(userId:Types.ObjectId, postId:Types.ObjectId){
+        const isExists=await this.checkExists(userId,postId)
+
+        if(isExists){
+            return this.LogLikesModel.findOneAndDelete({post:postId, user:userId})
+            .exec()
+        } else{
+            return this.LogLikesModel.create({post:postId, user:userId})
+        }
+        
     }
 
-    async delete(userId:Types.ObjectId, postId:Types.ObjectId){
-        return this.LogLikesModel.findOneAndDelete({post:postId, user:userId})
-        .exec()
-    }
+    
 }

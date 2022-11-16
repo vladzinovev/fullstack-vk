@@ -10,12 +10,6 @@ import { MessageService } from "./message.service";
 export class MessageController{
     constructor(private readonly messageService: MessageService){}
 
-    @Get('recent-list')
-    @Auth()
-    async getRecentMessage(@CurrentUser('_id') userId:Types.ObjectId){
-        return this.messageService.byUserFromId(userId);
-    }
-
     @Get('conversation/:userToId')
     @Auth()
     async getByUserId(@Param('userToId',IdValidationPipe) userToId:Types.ObjectId,
