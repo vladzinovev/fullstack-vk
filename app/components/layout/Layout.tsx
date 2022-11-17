@@ -13,13 +13,13 @@ const Layout:FC<PropsWithChildren<{title:string}>>=({children, title})=>{
                 <title>{title}</title>
             </Head>
             <Header/>
-            <Row gutter={[5,2]} >
+            <Row gutter={[20,30]} >
                 {user && (
-                    <Col span={6}>
+                    <Col span={4}>
                         <Sidebar/>
                     </Col>
                 )}
-                <Col span={user ? 18 : 24}>
+                <Col span={user ? 20 : 24}>
                     {children}
                 </Col>
             </Row>

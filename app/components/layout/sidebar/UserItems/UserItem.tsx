@@ -8,16 +8,17 @@ const UserItem:FC<{user:IUser}>=({user})=>{
         <Link
             key={user._id}
             href={`/profile/${user._id}`}
-            style={{
-                display:'flex',
-                alignItems:'center',
-                textDecoration:'none',
-                color:'#111',
-                marginBottom:12,
-            }}
         >
 
-            <a>
+            <a
+                style={{
+                    display:'flex',
+                    alignItems:'center',
+                    textDecoration:'none',
+                    color:'#111',
+                    marginBottom:12,
+                }}
+            >   
                 <div 
                     style={{
                         position:'relative',
@@ -26,21 +27,8 @@ const UserItem:FC<{user:IUser}>=({user})=>{
                         height:50
                     }}
                 >
-                    <Avatar src={user.avatar} alt='' size={46}/>
-                    {user.isInNetwork && (
-                        <div
-                            style={{
-                                backgroundColor:'#4FB14F',
-                                border:'2px solid #F1F7FA',
-                                width:12,
-                                height:12,
-                                position:'absolute',
-                                bottom:0,
-                                right:0,
-                                borderRadius:'50%'
-                            }}
-                        />
-                    )}
+                    <Avatar src={user.avatarPath} alt='' size={46}/>
+                    
                 </div>
                 <span style={{fontSize:14}}>{user.name}</span>
             </a>

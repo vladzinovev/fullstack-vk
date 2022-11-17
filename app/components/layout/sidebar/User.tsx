@@ -15,15 +15,15 @@ const User=()=>{
                 marginBottom:10, 
             }}
         >
-            <Row>
-                <Col span={3}>
-                    <Avatar alt='' src={user?.avatarPath}/>
+            <Row gutter={[5,5]}>
+                <Col span={5}>
+                    <Avatar alt='' src={user?.avatarPath} size={'large'}/>
                 </Col>
-                <Col span={9}>
-                    <div>{user?.name || 'Буз имени'}</div>
+                <Col span={19} style={{display:'flex', alignItems:'center'}}>
+                    <div>{user?.name}</div>
                 </Col>
             </Row>
-            <Button type='dashed' onClick={()=>{
+            <Button style={{marginTop:'1rem'}} type='dashed' onClick={()=>{
                 AuthService.logout()
                 setUser && setUser(null)
             }}>

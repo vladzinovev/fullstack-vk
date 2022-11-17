@@ -1,4 +1,5 @@
-import { Card, List } from "antd";
+import { useProfile } from "@/hooks/useProfile";
+import { Card, List, Skeleton } from "antd";
 import { useRouter } from "next/router";
 import { FC } from "react";
 import { users } from "../dataUser";
@@ -6,6 +7,7 @@ import UserItem from "./UserItem";
 
 const UserItems:FC=()=>{
     const {push}=useRouter();
+    const {isLoading,data}=useProfile();
 
     return(
         <Card
@@ -16,11 +18,16 @@ const UserItems:FC=()=>{
                 borderRadius:3,
             }}
         >
-            {users.map(user=>(
-                <UserItem user={user} key={user._id}/>
-            ))}
+            {isLoading?(
+                <Skeleton/>
+            ):data?.friends?.length ? (
+                data.friends?.map(user=>(<UserItem user={user} key={user._id}/>))
+            ):(
+                <div>Друзей нет</div>
+            )}
+            
             <List>
-                <List.Item onClick={()=> push('/conversations')}>
+                <List.Item style={{cursor:'pointer'}} onClick={()=> push('/conversations')}>
                     <List.Item.Meta title='Сообщения'/>
                 </List.Item>
             </List>
