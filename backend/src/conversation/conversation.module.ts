@@ -1,6 +1,7 @@
 import { Module } from "@nestjs/common";
 import { TypegooseModule } from "nestjs-typegoose";
 import { ConversationController } from "./conversation.controller";
+import { ConversationModel } from "./conversation.model";
 import { ConversationService } from "./conversation.service";
 
 @Module({
@@ -17,4 +18,4 @@ import { ConversationService } from "./conversation.service";
         ]),
     ]
 })
-export class MessageModule{}
+export class ConversationModule{}

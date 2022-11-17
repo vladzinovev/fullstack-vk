@@ -12,14 +12,14 @@ export const axiosClassic=axios.create({
 })
 
 //нужен делать запросы с авторизацией
-const instance=axios.create({
+export const axiosAuth=axios.create({
     //в режиме разрабоки
     baseURL:`${process.env.APP_URL}/api`,
     headers: getContentType()
 })
 
 //когда кидаем запрос на сервер
-instance.interceptors.request.use(config=>{
+axiosAuth.interceptors.request.use(config=>{
     //получаем свои куки
     const accessToken=Cookies.get('accessToken');
 
@@ -29,6 +29,5 @@ instance.interceptors.request.use(config=>{
     return config;
 })
 
-export default instance;
 //когда получаем ответ с сервера
-instance.interceptors.response.use()
+axiosAuth.interceptors.response.use()

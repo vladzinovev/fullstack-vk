@@ -7,6 +7,10 @@ export interface IPost{
     content:string
     image?:string
 }
+export interface IPostField{
+    content:string
+    image?:string
+}
 
 
 

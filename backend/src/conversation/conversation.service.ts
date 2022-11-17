@@ -18,7 +18,9 @@ export class ConversationService{
     }
 
     async create(){
-        return this.ConversationModel.create() 
+        return this.ConversationModel.create({
+            messages:[]
+        }) 
     }
 
 }

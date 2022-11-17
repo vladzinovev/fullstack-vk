@@ -6,6 +6,6 @@ export interface ConversationModel extends Base{}
 
 export class ConversationModel extends TimeStamps{
     @prop({default:[],ref:()=>MessageModel})
-    messages:Ref<MessageModel>[]
+    messages?:Ref<MessageModel>[]
 
 }

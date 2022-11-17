@@ -8,4 +8,5 @@ export interface IUser{
     gender?:string
     avatarPath:string
     friends?:IUser[]
+    postsCount?:number
 }

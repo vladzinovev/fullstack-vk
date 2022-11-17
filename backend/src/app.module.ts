@@ -12,6 +12,8 @@ import { PostModel } from './post/post.model';
 import { CommentModel } from './comment/comment.model';
 //import { ConversationModel } from './conversation/conversation.model';
 import { LogLikesModel } from './log-likes/log-likes.model';
+import { MediaModule } from './file/media.module';
+import { ConversationModel } from './conversation/conversation.model';
 
 
 @Module({
@@ -25,11 +27,12 @@ import { LogLikesModel } from './log-likes/log-likes.model';
       useFactory:getMongoConfig,
     }),
     UserModule,
-    //ConversationModel,
     MessageModel,
     PostModel,
     CommentModel,
-    LogLikesModel
+    LogLikesModel,
+    ConversationModel,
+    MediaModule
   ],
   controllers: [AppController],
   providers: [AppService],
