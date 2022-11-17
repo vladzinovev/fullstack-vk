@@ -10,31 +10,32 @@ import { MessageService } from "./message.service";
 export class MessageController{
     constructor(private readonly messageService: MessageService){}
 
-    @Get('conversation/:userToId')
+   /*  @Get('conversation/:userToId')
     @Auth()
     async getByUserId(@Param('userToId',IdValidationPipe) userToId:Types.ObjectId,
         @CurrentUser('_id') userFromId:Types.ObjectId
     ){
         return this.messageService.byUserToId(userFromId,userToId);
-    }
+    } */
 
     @UsePipes(new ValidationPipe())
     @HttpCode(200)
     @Post()
     @Auth()
-    async createPost(
+    async createMessage(
         @CurrentUser('_id') userId:Types.ObjectId,
         @Body() dto:MessageDto
     ){
         return this.messageService.create(userId,dto)
     }
-
+    @UsePipes(new ValidationPipe())
     @HttpCode(200)
     @Delete(':id')
     @Auth()
-    async deletePost(
+    async deleteMessage(
         @Param('id',IdValidationPipe) id:Types.ObjectId,
+        @Body() {conversationId}:{conversationId:string}
     ){
-        return this.messageService.delete(id)
+        return this.messageService.delete(id,conversationId)
     }
 }
