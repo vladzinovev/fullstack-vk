@@ -13,7 +13,7 @@ export interface IMessageFields{
     conversationId:string
 }
 
-export interface IConvertation{
+export interface IConversation{
     id:string
     messages:IMessage[]
 }
