@@ -1,5 +1,5 @@
 
-import { IPost } from "@/types/posts.interface"
+import { IPost, IPostField } from "@/types/posts.interface"
 import { axiosAuth, axiosClassic } from "api/interceptors"
 
 //переписываем с БД
@@ -12,8 +12,8 @@ export const PostService={
         return axiosClassic.get<IPost[]>(`/post/by-userId/${userId}`)
     },
 
-    async create(){
-        return axiosAuth.post(`/post`)
+    async create(body:IPostField){
+        return axiosAuth.post(`/post`,body)
     },
 
     async delete(postId:string){

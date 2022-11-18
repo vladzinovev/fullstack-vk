@@ -1,16 +1,22 @@
 import { useAuth } from "@/hooks/useAuth";
+import { PostService } from "@/services/post.service";
 import Icon from '@ant-design/icons';
-import {Alert,Card,Input} from 'antd';
+import {Alert,Card,Input, Skeleton} from 'antd';
+import { errorCatch } from "api/api.utils";
 import { FC, useState,KeyboardEvent } from "react"
+import { useMutation } from "react-query";
 
 const AddPost:FC=()=>{
-    const error='';
     const [content,setContent]=useState('');
     const {user}=useAuth();
 
+    const {mutateAsync, isLoading, error}=useMutation('add Post', ()=>PostService.create({content}),{onSuccess(){
+        setContent('')
+    }})
+
     const addPostHandler = async (e:KeyboardEvent<HTMLInputElement>)=>{
         if(e.key==='Enter' && user){
-            setContent('')
+            await mutateAsync()
         }
     }
 
@@ -18,11 +24,12 @@ const AddPost:FC=()=>{
     return (
         <>
             {error && (
-                <Alert message={error} type='error' showIcon/>
+                <Alert message={errorCatch(error)} type='error' showIcon/>
             )}
         
             <Card bodyStyle={{borderRadius:'10px'}}>
-        
+            
+            {isLoading ? <Skeleton/> : 
                 <Input
                     placeholder='Расскажи, что у тебя нового'
                     
@@ -32,7 +39,7 @@ const AddPost:FC=()=>{
                     onChange={(e)=>setContent(e.target.value)}
                     value={content}
                 />
-                
+            }    
             </Card>
         </>
     )
