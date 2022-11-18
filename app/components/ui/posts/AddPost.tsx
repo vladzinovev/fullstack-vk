@@ -6,6 +6,8 @@ import { errorCatch } from "api/api.utils";
 import { FC, useState,KeyboardEvent } from "react"
 import { useMutation } from "react-query";
 
+import styles from './Post.module.scss';
+
 const AddPost:FC=()=>{
     const [content,setContent]=useState('');
     const {user}=useAuth();
@@ -27,7 +29,7 @@ const AddPost:FC=()=>{
                 <Alert message={errorCatch(error)} type='error' showIcon/>
             )}
         
-            <Card bodyStyle={{borderRadius:'10px'}}>
+            <Card bodyStyle={{borderRadius:'10px'}} className={styles.item}>
             
             {isLoading ? <Skeleton/> : 
                 <Input
