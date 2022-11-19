@@ -13,6 +13,7 @@ const PostItem:FC<{post:IPost}>=({post})=>{
             {post.image &&
                 <Image width={400} src={post.image} alt=''/>
             }
+            <PostActions/>
         </Card>
     )
 }
