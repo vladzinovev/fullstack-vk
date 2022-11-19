@@ -10,7 +10,9 @@ const PostItem:FC<{post:IPost}>=({post})=>{
         <Card className={styles.item}>
             <UserInfo post={post}/>
             <p>{post.content}</p>
-            <Image width={400} src={post.image} alt=''/>
+            {post.image &&
+                <Image width={400} src={post.image} alt=''/>
+            }
         </Card>
     )
 }
