@@ -29,7 +29,7 @@ const AddPost:FC=()=>{
                 <Alert message={errorCatch(error)} type='error' showIcon/>
             )}
         
-            <Card bodyStyle={{borderRadius:'10px'}} className={styles.item}>
+            <Card style={{borderRadius:'10px', marginTop:15}} className={styles.item}>
             
             {isLoading ? <Skeleton/> : 
                 <Input
