@@ -2,7 +2,7 @@ import { IPost } from "@/types/posts.interface";
 import { Avatar } from "antd";
 import Link from "next/link";
 import { FC } from "react"
-import { time2TimeAgo } from "../utils/converterData";
+import { time2TimeAgo } from "../../utils/converterData";
 
 const UserInfo:FC<{post:IPost}>=({post})=>{
     return (

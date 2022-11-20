@@ -2,7 +2,7 @@ import { initialPosts } from "@/components/screens/home/posts";
 import { IPost } from "@/types/posts.interface";
 import { Alert, Skeleton } from "antd";
 import { FC } from "react"
-import PostItem from "./PostItem";
+import PostItem from "./post-item/PostItem";
 
 const Posts:FC<{posts:IPost[]; isLoading:boolean}>=(posts,isLoading)=>{
     return (
@@ -11,7 +11,7 @@ const Posts:FC<{posts:IPost[]; isLoading:boolean}>=(posts,isLoading)=>{
                 <Skeleton/>
             ) :  posts?.length ? (
                     posts.map(post=><PostItem post={post} key={post._id}/>)
-                ) : (<Alert message='Постов не найдено' style={{marginTop:20px}}/>)
+                ) : (<Alert message='Постов не найдено' style={{marginTop:17}}/>)
             }
         </>
     )

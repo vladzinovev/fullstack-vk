@@ -4,7 +4,7 @@ import PostLikes from "./PostLikes"
 
 const PostActions:FC<{postId:string}>=({postId})=>{
     return (
-        <div>
+        <div style={{marginTop:15}}>
             <PostLikes postId={postId}/>
             <PostComments postId={postId}/>
         </div>

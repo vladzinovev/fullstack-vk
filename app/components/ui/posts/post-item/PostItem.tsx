@@ -4,6 +4,7 @@ import { FC } from "react"
 import UserInfo from "./UserInfo";
 
 import styles from './Post.module.scss';
+import PostActions from "./post-actions/PostActions";
 
 const PostItem:FC<{post:IPost}>=({post})=>{
     return (
@@ -13,7 +14,7 @@ const PostItem:FC<{post:IPost}>=({post})=>{
             {post.image &&
                 <Image width={400} src={post.image} alt=''/>
             }
-            <PostActions/>
+            <PostActions postId={post._id} />
         </Card>
     )
 }

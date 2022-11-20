@@ -1,22 +1,15 @@
 
+import { IComment } from "@/types/comment.interface"
 import { axiosAuth, axiosClassic } from "api/interceptors"
 
 //переписываем с БД
 export const CommentService={
-    async getAll(){
-        return axiosClassic.get<IPost[]>(`/post`)
+    async getByPostId(postId:string){
+        return axiosClassic.get<IComment[]>(`/comment/by-post/${postId}`)
     },
 
-    async getByUserId(userId:string){
-        return axiosClassic.get<IPost[]>(`/post/by-userId/${userId}`)
-    },
-
-    async create(){
-        return axiosAuth.post(`/post`)
-    },
-
-    async delete(postId:string){
-        return axiosAuth.delete(`/post/${postId}`)
+    async create(body:IComment){
+        return axiosAuth.post<IComment>(`/comment`, body)
     },
 
 }
