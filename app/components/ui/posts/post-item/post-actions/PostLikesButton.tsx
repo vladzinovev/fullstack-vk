@@ -1,9 +1,9 @@
 import { Button } from "antd"
-import { HeartOutLined, HeartFilled } from "@antd-design/icons";
 import { FC } from "react"
 import { useAuth } from "@/hooks/useAuth";
 import { useQuery,useMutation } from "react-query";
 import { LogLikesService } from "@/services/log-likes.service";
+import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 
 const PostLikes:FC<{postId:string}>=({postId})=>{
     const {user}=useAuth();
@@ -40,7 +40,7 @@ const PostLikes:FC<{postId:string}>=({postId})=>{
     return (
         <Button 
             icon={
-                isLiked ? <HeartFilled style={{color:'#40a9ff'}} /> : <HeartOutLined/> 
+                isLiked ? <HeartFilled style={{color:'#40a9ff'}} /> : <HeartOutlined/> 
             }
             type='dashed'
             onClick={()=>mutate()}
