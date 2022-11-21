@@ -1,14 +1,16 @@
+import { CommentOutlined } from "@ant-design/icons";
 import { Button } from "antd"
 import { FC } from "react"
 
-const PostComments:FC<{postId:string}>=({postId})=>{
+const PostComments:FC<{postId:string,countComments:number}>=({postId,countComments})=>{
     return (
         <Button 
-            icon={<HeartOutLined style={{color:isActive ? '#40a9ff' : '#CCD9E2'}}/>} 
+            icon={<CommentOutlined />} 
             type='dashed'
+            style={{marginLeft:15}}
         >
-            123
+            {countComments}
         </Button>
     )
-
-export default PostComments
+}
+export default PostComments;

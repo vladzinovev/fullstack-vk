@@ -30,7 +30,7 @@ const PostItem:FC<{post:IPost}>=({post})=>{
                 postId={post._id} 
                 countComments={commentsQuery.data?.length || 0}
             />
-            <PostComments commentQuery={commentsQuery} />
+            <PostComments commentsQuery={commentsQuery} postId={post._id}/>
         </Card>
     )
 }
