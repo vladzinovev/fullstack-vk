@@ -1,9 +1,7 @@
-import { Dispatch, SetStateAction } from "react"
+import React, { Component, ReactElement} from "react"
 
 export interface IUploadField{
-    title?:string,
     onChange:(...event:any)=>void,
-    folder?:string,
-    setValue?:(val:number)=>void
-    setIsChosen?:Dispatch<SetStateAction<boolean>> 
+    folder?:string
+    Button:ReactElement
 }

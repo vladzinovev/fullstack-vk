@@ -7,11 +7,11 @@ import { useQuery } from "react-query";
 
 const Home:FC=()=>{
 
-    const {data, isLoading} = useQuery('get all posts', ()=>PostService.getAll(),{select:({data})=>data})
+    const {data, isLoading,refetch} = useQuery('get all posts', ()=>PostService.getAll(),{select:({data})=>data})
     return (
         <Layout title='Главная'>
             <div>
-                <AddPost/>
+                    <AddPost refetch={refetch}/>
                 <Posts posts={data || []} isLoading={isLoading} />
             </div>
         </Layout>

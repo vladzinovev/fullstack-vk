@@ -1,15 +1,12 @@
 .file{
-    @apply m-auto; 
     
-    >h1 {
-        @apply tetx-xl font-semibold m-auto;
-    }
 
     > label{
-        @apply block;
+        display: block;
+        cursor:pointer;
         
         >input{
-            @apply cursor-pointer block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100
+            display: none;
         }
     }
 }
