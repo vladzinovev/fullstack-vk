@@ -10,9 +10,12 @@ import styles from '../../../layout/header/auth-form/AuthForm.module.scss'
 
 const AddComment:FC<{postId:string, refetch:any}>=({postId,refetch})=>{
 
+    //очищаем форму с веденным сообщением после отправки
+    const [form]=Form.useForm();
+
     const {mutateAsync}=useMutation('add comment', (data:ICommentFields)=>CommentService.create({...data,postId}),{
         onSuccess(data){
-            //reset()
+            form.resetFields()
             refetch()
         }
     })
@@ -30,26 +33,25 @@ const AddComment:FC<{postId:string, refetch:any}>=({postId,refetch})=>{
 
     return(
         <Form
+            form={form}
             name="basic"
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 16 }}
+            wrapperCol={{ span: 24 }}
             initialValues={{ remember: true }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
-            style={{position:'relative'}}
+            style={{position:'relative', marginTop:25,maxWidth:350}}
         >
             <Form.Item
-                label="Message"
                 name="message"
                 rules={[{ required: true, message: 'Message is required!' }]}
             >
                 <Input />
             </Form.Item>
 
-            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                <Button type='primary' htmlType='submit' style={{position:'absolute', right:0,top:0}} icon={<SendOutlined/>}/>
-            </Form.Item>
+            
+            <Button type='primary' htmlType='submit' style={{position:'absolute', right:0,top:0}} icon={<SendOutlined/>}/>
+        
 
         </Form>
     )

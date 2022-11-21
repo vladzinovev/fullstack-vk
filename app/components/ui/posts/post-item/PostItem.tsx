@@ -1,6 +1,6 @@
 import { IPost } from "@/types/posts.interface";
 import { Card, Image } from "antd";
-import { FC } from "react"
+import { FC, useState } from "react"
 import UserInfo from "./UserInfo";
 import { useQuery } from "react-query"
 import styles from './Post.module.scss';
@@ -19,8 +19,10 @@ const PostItem:FC<{post:IPost}>=({post})=>{
         }
     )
 
+    const [isOpenComment, setIsOpenComment] = useState(false);
+
     return (
-        <Card className={styles.item}>
+        <Card className={styles.item} bodyStyle={{transition:'all .4s easy-in-out'}}>
             <UserInfo postDate={post.createdAt} user={post.user}/>
             <p>{post.content}</p>
             {post.image &&
@@ -29,8 +31,9 @@ const PostItem:FC<{post:IPost}>=({post})=>{
             <PostActions 
                 postId={post._id} 
                 countComments={commentsQuery.data?.length || 0}
+                toggleComments={()=>setIsOpenComment(!isOpenComment)}
             />
-            <PostComments commentsQuery={commentsQuery} postId={post._id}/>
+            {isOpenComment && <PostComments commentsQuery={commentsQuery} postId={post._id}/>}
         </Card>
     )
 }

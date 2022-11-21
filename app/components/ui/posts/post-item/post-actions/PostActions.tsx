@@ -1,12 +1,19 @@
 import { FC } from "react"
-import PostComments from "./post-comments/PostCommentsButton"
-import PostLikes from "./PostLikesButton"
+import PostCommentsButton from "./post-comments/PostCommentsButton"
+import PostLikesButton from "./PostLikesButton"
 
-const PostActions:FC<{postId:string, countComments:number}>=({postId, countComments})=>{
+export interface IPostCommentsButton{
+    postId:string
+    countComments:number
+    toggleComments:()=>void
+
+}
+
+const PostActions:FC<IPostCommentsButton>=({postId, countComments,toggleComments})=>{
     return (
         <div style={{marginTop:15}}>
-            <PostLikes postId={postId}/>
-            <PostComments postId={postId} countComments={countComments}/>
+            <PostLikesButton postId={postId}/>
+            <PostCommentsButton postId={postId} countComments={countComments} toggleComments={toggleComments}/>
         </div>
     )
 }

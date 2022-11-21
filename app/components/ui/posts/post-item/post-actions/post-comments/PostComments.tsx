@@ -16,7 +16,7 @@ const PostComments:FC<{commentsQuery:IQueryData, postId:string}>=({commentsQuery
     const {user} = useAuth();
 
     return(
-        <div>
+        <div className='fade'>
             {user && <AddComment postId={postId} refetch={refetch}/>}
             {isLoading ? (
                 <Skeleton/>
