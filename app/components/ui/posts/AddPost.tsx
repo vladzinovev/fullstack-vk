@@ -1,7 +1,7 @@
 import { useAuth } from "@/hooks/useAuth";
 import { PostService } from "@/services/post.service";
-import Icon from '@ant-design/icons';
-import {Alert,Card,Input, Skeleton} from 'antd';
+import Icon, { PictureOutlined } from '@ant-design/icons';
+import {Alert,Button,Card,Col,Input, Row, Skeleton} from 'antd';
 import { errorCatch } from "api/api.utils";
 import { FC, useState,KeyboardEvent } from "react"
 import { useMutation } from "react-query";
@@ -29,19 +29,26 @@ const AddPost:FC=()=>{
                 <Alert message={errorCatch(error)} type='error' showIcon/>
             )}
         
-            <Card style={{borderRadius:'10px', marginTop:15}} className={styles.item}>
+            <Card style={{marginTop:15}} className={styles.item}>
             
-            {isLoading ? <Skeleton/> : 
-                <Input
-                    placeholder='Расскажи, что у тебя нового'
-                    
-                    style={{borderRadius:'25px'}}
-
-                    onKeyPress={addPostHandler}
-                    onChange={(e)=>setContent(e.target.value)}
-                    value={content}
-                />
-            }    
+                {isLoading ? <Skeleton/> : (
+                    <Row gutter={[15,15]}>
+                        <Col span={1}>
+                            <Button type="dashed">
+                                <PictureOutlined/>
+                            </Button>
+                        </Col>
+                        
+                        <Col span={23}>
+                            <Input
+                                placeholder='Расскажи, что у тебя нового'
+                                onKeyPress={addPostHandler}
+                                onChange={(e)=>setContent(e.target.value)}
+                                value={content}
+                            />
+                        </Col>
+                    </Row>   
+                )}    
             </Card>
         </>
     )
