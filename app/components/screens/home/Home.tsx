@@ -12,7 +12,7 @@ const Home:FC=()=>{
         <Layout title='Главная'>
             <div>
                     <AddPost refetch={refetch}/>
-                <Posts posts={data || []} isLoading={isLoading} />
+                <Posts posts={data || []} isLoading={isLoading} refetchPosts={refetch}/>
             </div>
         </Layout>
         

@@ -7,8 +7,9 @@ import styles from './Post.module.scss';
 import PostActions from "./post-actions/PostActions";
 import { CommentService } from "@/services/comment.service";
 import PostComments from "./post-actions/post-comments/PostComments";
+import DeletePostButton from "./post-actions/DeletePostButton";
 
-const PostItem:FC<{post:IPost}>=({post})=>{
+const PostItem:FC<{post:IPost,refetchPosts:any}>=({post,refetchPosts})=>{
 
     const commentsQuery=useQuery(
         ['get comments',post._id],
@@ -34,6 +35,7 @@ const PostItem:FC<{post:IPost}>=({post})=>{
                 toggleComments={()=>setIsOpenComment(!isOpenComment)}
             />
             {isOpenComment && <PostComments commentsQuery={commentsQuery} postId={post._id}/>}
+            <DeletePostButton postId={post._id} refetch={refetchPosts} />
         </Card>
     )
 }
