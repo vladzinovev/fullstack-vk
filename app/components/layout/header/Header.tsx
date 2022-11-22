@@ -1,5 +1,7 @@
 import { FC, useState } from "react";
 import styles from './Header.module.css';
+import Search from "./search/Search";
+import logoImg from './vk-logo.png'
 
 const Header:FC=()=>{
     const [isSearchActive, setIsSearchActive] = useState(false);
@@ -8,9 +10,7 @@ const Header:FC=()=>{
             <div className={styles['image-wrapper']}>
                 <img src={logoImg.src} alt=''/>
             </div>
-            <div className={styles.wrapper}>
-                <input type='text' placeholder='Поиск' onClick={()=>setIsSearchActive(true)}/>
-            </div>
+            <Search/>
         </header>
     )
 }
