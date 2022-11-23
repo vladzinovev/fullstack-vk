@@ -44,6 +44,7 @@ const PostLikes:FC<{postId:string}>=({postId})=>{
             }
             type='dashed'
             onClick={()=>mutate()}
+            className='outline-none'
         >
             <span>{likes}</span>
         </Button>

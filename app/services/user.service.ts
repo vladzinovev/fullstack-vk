@@ -3,7 +3,7 @@ import { axiosAuth, axiosClassic } from "api/interceptors"
 
 //переписываем с БД
 export const UserService={
-    async FindUsers(searchTerm:string){
+    async findUsers(searchTerm:string){
         return axiosClassic.get<IUser[]>(`/user/find/${searchTerm}`)
     },
 

@@ -8,8 +8,11 @@ import PostActions from "./post-actions/PostActions";
 import { CommentService } from "@/services/comment.service";
 import PostComments from "./post-actions/post-comments/PostComments";
 import DeletePostButton from "./post-actions/DeletePostButton";
+import { useAuth } from "@/hooks/useAuth";
 
 const PostItem:FC<{post:IPost,refetchPosts:any}>=({post,refetchPosts})=>{
+
+    const {user} = useAuth();
 
     const commentsQuery=useQuery(
         ['get comments',post._id],
@@ -34,8 +37,13 @@ const PostItem:FC<{post:IPost,refetchPosts:any}>=({post,refetchPosts})=>{
                 countComments={commentsQuery.data?.length || 0}
                 toggleComments={()=>setIsOpenComment(!isOpenComment)}
             />
-            {isOpenComment && <PostComments commentsQuery={commentsQuery} postId={post._id}/>}
-            <DeletePostButton postId={post._id} refetch={refetchPosts} />
+            {isOpenComment && 
+                <PostComments commentsQuery={commentsQuery} postId={post._id}/>
+            }
+
+            {post.user._id == user?._id && 
+                <DeletePostButton postId={post._id} refetch={refetchPosts} />
+            }
         </Card>
     )
 }
