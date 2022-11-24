@@ -5,16 +5,23 @@ import { FC, useState } from "react"
 import styles from '../Header.module.css';
 import { Card, Skeleton } from "antd";
 import UserCard from "@/components/ui/user-card/UserCard";
+import cn from 'classnames';
 
 const Search:FC=()=>{
     
     const {data, handleSearch, searchTerm, isLoading, visible}=useSearch();
     return (
         <div className={styles.wrapper} ref={visible.ref}>
-            {!visible.isShow && <SearchOutlined className="fade"/>}
-            <input type='text' placeholder='Поиск' onClick={()=>visible.setIsShow(!visible.isShow)}/>
-            {visible.isShow && 
-                <Card bordered={false}>
+            <SearchOutlined className="fade"/>
+            <input 
+                type='text' 
+                placeholder='Поиск пользователей' 
+                value={searchTerm} 
+                onChange={handleSearch} 
+                
+            />
+            {visible.isShow && (
+                <Card bordered={false} className={cn(styles.result,'fade')}>
                     {isLoading?(
                         <Skeleton/>
                     ):data?.length ? (
@@ -22,7 +29,8 @@ const Search:FC=()=>{
                     ):(
                         <div>Пользователей не найдено</div>
                     )}
-                </Card>}
+                </Card>
+            )}
         </div>
     )
 }
