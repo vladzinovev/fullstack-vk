@@ -8,13 +8,13 @@ const ListItem:FC<{item:IMenuItem}>=({item})=>{
     return(
         <List.Item>
             <List.Item.Meta title={
-                <Link href='/conversations'>
+                <Link href={item.link}>
                     <a>
                         <span style={{marginRight:6}}>
                             <item.icon/> 
                             <MessageOutlined/>
                         </span>
-                        <span>Сообщения</span>
+                        <span>{item.title}</span>
                     </a>
                 </Link>
             }/>

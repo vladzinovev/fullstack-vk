@@ -6,6 +6,8 @@ import { users } from "../dataUser";
 import UserItem from "./UserItem";
 import styles from '../Sidebar.module.scss';
 import Link from "next/link";
+import { MessageOutlined } from "@ant-design/icons";
+import ListItem from "../ListItem";
 
 const UserItems:FC=()=>{
     const {push}=useRouter();
@@ -21,18 +23,13 @@ const UserItems:FC=()=>{
                 <div>Друзей нет</div>
             )}
             
-            <List>
-                <List.Item>
-                    <List.Item.Meta title={
-                        <Link href='/conversations'>
-                            <a>
-                                <span style={{marginRight:6}}><MessageOutlined/></span>
-                                <span>Сообщения</span>
-                            </a>
-                        </Link>
-                    }/>
-                    
-                </List.Item>
+            <List itemLayout='vertical'> 
+                <ListItem item={{
+                    title:'Сообщение',
+                    icon:MessageOutlined,
+                    link:'./conversations',
+                }}/>
+                
             </List>
 
         </Card>
