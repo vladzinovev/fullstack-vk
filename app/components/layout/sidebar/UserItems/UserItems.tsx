@@ -4,20 +4,15 @@ import { useRouter } from "next/router";
 import { FC } from "react";
 import { users } from "../dataUser";
 import UserItem from "./UserItem";
+import styles from '../Sidebar.module.scss';
+import Link from "next/link";
 
 const UserItems:FC=()=>{
     const {push}=useRouter();
     const {isLoading,data}=useProfile();
 
     return(
-        <Card
-            style={{
-                padding:2,
-                backgroundColor:'#F1F7FA',
-                border:'none',
-                borderRadius:3,
-            }}
-        >
+        <Card className={styles.card}>
             {isLoading?(
                 <Skeleton/>
             ):data?.friends?.length ? (
@@ -27,8 +22,16 @@ const UserItems:FC=()=>{
             )}
             
             <List>
-                <List.Item style={{cursor:'pointer'}} onClick={()=> push('/conversations')}>
-                    <List.Item.Meta title='Сообщения'/>
+                <List.Item>
+                    <List.Item.Meta title={
+                        <Link href='/conversations'>
+                            <a>
+                                <span style={{marginRight:6}}><MessageOutlined/></span>
+                                <span>Сообщения</span>
+                            </a>
+                        </Link>
+                    }/>
+                    
                 </List.Item>
             </List>
 
