@@ -20,7 +20,7 @@ const User=()=>{
                 </Col>
             </Row>
 
-            <List>
+            <List style={{marginTop:'1rem'}}>
                 <ListItem item={{
                     link: '/profile/edit',
                     title:'Редактирование профиля',
