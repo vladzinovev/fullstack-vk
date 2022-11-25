@@ -24,6 +24,7 @@ export class PostService{
         return this.PostModel.find({user:userId})
         .select('-_v')
         .populate('user', 'avatarPath name isVerified')
+        .sort({createdAt:'desc'})
         .exec()
     }
 

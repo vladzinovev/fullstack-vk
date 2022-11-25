@@ -10,7 +10,7 @@ import UploadField from "../upload-field/UploadField";
 
 import styles from './Post.module.scss';
 
-const AddPost:FC<{refetch:any}>=({refetch})=>{
+const AddPost:FC<{refetch:any, col?:1|2}>=({refetch,col=1})=>{
     const [content,setContent]=useState('');
     const [image,setImage]=useState<IMediaResponse>({} as IMediaResponse);
     const {user}=useAuth();
@@ -35,11 +35,11 @@ const AddPost:FC<{refetch:any}>=({refetch})=>{
                 <Alert message={errorCatch(error)} type='error' showIcon/>
             )}
         
-            <Card style={{marginTop:15}} className={styles.item}>
+            <Card style={col==1? {marginTop:15} :{}} className={styles.item}>
             
                 {isLoading ? <Skeleton/> : (
                     <Row gutter={[15,15]}>
-                        <Col span={1}>
+                        <Col span={col}>
                             <UploadField onChange={e=>setImage(e.value)} Button={
                                 <div className="ant-btn ant-btn-dashed">
                                     <PictureOutlined/>
@@ -48,7 +48,7 @@ const AddPost:FC<{refetch:any}>=({refetch})=>{
                             
                         </Col>
                         
-                        <Col span={23}>
+                        <Col span={col==1?23:22}>
                             <Input
                                 placeholder='Расскажи, что у тебя нового'
                                 onKeyPress={addPostHandler}
