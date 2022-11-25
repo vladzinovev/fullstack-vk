@@ -10,7 +10,7 @@ const nextConfig = {
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID
   },
   images:{
-    domains:['localhost'],
+    domains:['localhost','lh3.googleusercontent.com','w7.pngwing.com'],
   },
   async rewrites(){
     return[
