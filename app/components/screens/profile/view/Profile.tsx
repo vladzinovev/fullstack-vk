@@ -13,7 +13,7 @@ const Profile:FC=()=>{
         select:({data})=>data
     })
     return (
-        <Layout title='Моя страница'>
+        <Layout title={user.name}>
             <Card bordered={false} bodyStyle={{padding:'1rem 0'}}>
                 <Row gutter={[20,20]}>
                     <Col span={5}>
