@@ -1,7 +1,9 @@
 import { useAuth } from "@/hooks/useAuth";
 import { AuthService } from "@/services/auth/auth.service";
-import { Avatar, Button, Card, Col, Row } from "antd";
-import { users } from "./dataUser";
+import { EditOutlined } from "@ant-design/icons";
+import { Avatar, Button, Card, Col, List, Row } from "antd";
+
+import ListItem from "./ListItem";
 
 import styles from './Sidebar.module.scss';
 
@@ -17,6 +19,15 @@ const User=()=>{
                     <div>{user?.name}</div>
                 </Col>
             </Row>
+
+            <List>
+                <ListItem item={{
+                    link: '/profile/edit',
+                    title:'Редактирование профиля',
+                    icon: EditOutlined
+                }}/>
+            </List>
+
             <Button style={{marginTop:'1rem'}} type='dashed' onClick={()=>{
                 AuthService.logout()
                 setUser && setUser(null)
@@ -24,6 +35,7 @@ const User=()=>{
                 Выйти
             </Button>
 
+            
         </Card>
     )
     
