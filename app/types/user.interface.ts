@@ -10,3 +10,10 @@ export interface IUser{
     friends?:IUser[]
     postsCount?:number
 }
+export interface IUserFields extends Pick<IUser, 'name'>{
+    
+    avatarPath:string
+    birthDate:string
+    city:string
+    gender:'male' | 'female'
+}

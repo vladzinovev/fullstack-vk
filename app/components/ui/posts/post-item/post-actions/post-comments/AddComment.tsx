@@ -36,7 +36,6 @@ const AddComment:FC<{postId:string, refetch:any}>=({postId,refetch})=>{
             form={form}
             name="basic"
             wrapperCol={{ span: 24 }}
-            initialValues={{ remember: true }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
