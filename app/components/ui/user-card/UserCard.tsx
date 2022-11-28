@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { FC } from "react"
 import styles from './UserCard.module.scss'
 
-const UserCard:FC<{user:IUser}>=({user})=>{
+const UserCard:FC<{user:IUser, hideResult?:()=>void}>=({user, hideResult})=>{
 
     const {push} = useRouter();
     return (
@@ -17,7 +17,7 @@ const UserCard:FC<{user:IUser}>=({user})=>{
             </div>
 
             <div>
-                <Button type='dashed' onClick={()=>push(`/profile/${user._id}`)}>Перейти в профиль</Button>
+                <Button type='dashed' onClick={()=>push(`/profile/${user._id}`).then(hideResult)}>Перейти в профиль</Button>
             </div>
         </Card>
     )

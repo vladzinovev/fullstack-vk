@@ -2,8 +2,29 @@ import { IUser } from "@/types/user.interface"
 import { Button, Card } from "antd"
 import { FC } from "react"
 import Image from "next/image"
+import { useAuth } from "@/hooks/useAuth"
+import { useProfile } from "@/hooks/useProfile"
+import { useMutation } from "react-query"
+import { UserService } from "@/services/user.service"
 
 const ProfileAvatar:FC<{profile:IUser}>=({profile})=>{
+    const {user}=useAuth()
+    const isMyProfile=user?._id==profile._id;
+    const {data, refetch} = useProfile();
+
+    const isExistsFriend=data?.friends?.some(
+        friend=>friend._id===profile._id
+    )
+
+    const {mutate} = useMutation(
+        'toogle friend',
+        ()=>UserService.toggleFriend(profile._id),
+        {
+            onSuccess:async ()=>{
+                await refetch()
+            }
+        }
+    )
     return(
         <Card style={{textAlign:'center'}}>
             {profile.avatarPath &&(
@@ -16,9 +37,19 @@ const ProfileAvatar:FC<{profile:IUser}>=({profile})=>{
                     layout='responsive'
                 />
             )}
-            
-            <Button type='dashed' style={{margin:'10px 0'}}>Добавить в друзья</Button>
+            {/* {user?._id!==profile._id && 
+                <>
+                    <Button type='dashed' style={{margin:'10px 0'}}>Добавить в друзья</Button>
+                    <Button type='primary'>Написать сообщение</Button>
+                </>
+            } */}
+            <Button type='dashed' style={{margin:'10px 0'}} disabled={isMyProfile || isExistsFriend}
+                onClick={()=> mutate()}
+            >
+                {isExistsFriend ? 'Удалить из друзей' : 'Добавить в друзья'}
+            </Button>
             <Button type='primary'>Написать сообщение</Button>
+            
         </Card>
     )
 }

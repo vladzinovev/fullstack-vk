@@ -9,7 +9,12 @@ import cn from 'classnames';
 
 const Search:FC=()=>{
     
-    const {data, handleSearch, searchTerm, isLoading, visible}=useSearch();
+    const {data, handleSearch, searchTerm, setSearchTerm, isLoading, visible}=useSearch();
+
+    const hideResult=()=>{
+        setSearchTerm('');
+        visible.setIsShow(false)
+    }
     return (
         <div className={styles.wrapper} ref={visible.ref}>
             <SearchOutlined className="fade"/>
@@ -25,7 +30,7 @@ const Search:FC=()=>{
                     {isLoading?(
                         <Skeleton/>
                     ):data?.length ? (
-                        data.map(user=>(<UserCard user={user} key={user._id}/>))
+                        data.map(user=>(<UserCard user={user} key={user._id} hideResult={hideResult/>))
                     ):(
                         <div>Пользователей не найдено</div>
                     )}
