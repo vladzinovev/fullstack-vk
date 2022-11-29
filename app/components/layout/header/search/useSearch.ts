@@ -8,7 +8,7 @@ export const useSearch=()=>{
     const visible = useOutside(false);
     const [searchTerm, setSearchTerm] =useState('');
     const debounceSearch=useDebounce(searchTerm,500);
-    const {isSuccess,data} = useQuery(
+    const {isLoading,data} = useQuery(
         ['search videos', debounceSearch],
         ()=>UserService.findUsers(debounceSearch),
         {
@@ -21,6 +21,6 @@ export const useSearch=()=>{
         setSearchTerm(e.target.value)
     }
     return{
-        handleSearch, isSuccess, data, searchTerm, visible
+        handleSearch, isLoading, data, searchTerm, visible, setSearchTerm
     }
 }

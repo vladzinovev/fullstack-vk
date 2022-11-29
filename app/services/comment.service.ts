@@ -1,5 +1,5 @@
 
-import { IComment } from "@/types/comment.interface"
+import { IComment, ICommentFields } from "@/types/comment.interface"
 import { axiosAuth, axiosClassic } from "api/interceptors"
 
 //переписываем с БД
@@ -8,7 +8,7 @@ export const CommentService={
         return axiosClassic.get<IComment[]>(`/comment/by-post/${postId}`)
     },
 
-    async create(body:IComment){
+    async create(body:ICommentFields){
         return axiosAuth.post<IComment>(`/comment`, body)
     },
 

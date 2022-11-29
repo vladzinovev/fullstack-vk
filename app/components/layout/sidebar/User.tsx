@@ -1,4 +1,5 @@
 import { useAuth } from "@/hooks/useAuth";
+import { useProfile } from "@/hooks/useProfile";
 import { AuthService } from "@/services/auth/auth.service";
 import { EditOutlined } from "@ant-design/icons";
 import { Avatar, Button, Card, Col, List, Row } from "antd";
@@ -9,6 +10,7 @@ import styles from './Sidebar.module.scss';
 
 const User=()=>{
     const {user,setUser}=useAuth();
+    const {data}= useProfile();
     return(
         <Card className={styles.card}>
             <Row gutter={[5,5]}>

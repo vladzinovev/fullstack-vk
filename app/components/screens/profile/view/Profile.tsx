@@ -5,7 +5,7 @@ import { Card, Col, Row, Spin } from "antd";
 import { FC } from "react"
 import { useQuery } from "react-query";
 import ProfileAvatar from "./ProfileAvatar";
-import ProfileInfo from "./ProfileInfo";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import ProfilePosts from "./ProfilePosts";
 
 const Profile:FC=()=>{
@@ -13,7 +13,7 @@ const Profile:FC=()=>{
         select:({data})=>data
     })
     return (
-        <Layout title={user.name}>
+        <Layout title={data?.name || ''}>
             <Card bordered={false} bodyStyle={{padding:'1rem 0'}}>
                 <Row gutter={[20,20]}>
                     <Col span={5}>

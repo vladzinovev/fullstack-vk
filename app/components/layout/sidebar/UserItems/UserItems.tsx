@@ -2,7 +2,6 @@ import { useProfile } from "@/hooks/useProfile";
 import { Card, List, Skeleton } from "antd";
 import { useRouter } from "next/router";
 import { FC } from "react";
-import { users } from "../dataUser";
 import UserItem from "./UserItem";
 import styles from '../Sidebar.module.scss';
 import Link from "next/link";

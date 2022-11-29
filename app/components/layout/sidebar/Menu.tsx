@@ -13,7 +13,6 @@ const Menu=()=>{
             <List itemLayout='vertical'>
                 {menu.map(item=>(
                     <ListItem key={item.link} item={item} />
-                        
                 ))}
             </List>
             

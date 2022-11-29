@@ -17,7 +17,7 @@ const ProfileEdit:FC=()=>{
 
     const [image, setImage] =useState<IMediaResponse>({} as IMediaResponse)
 
-    const {isLoading,data}=useProfile(({data})=>{
+    const {isLoading,data,refetch}=useProfile(({data})=>{
         setImage({
             name:'default',
             url:data.avatarPath
@@ -25,14 +25,21 @@ const ProfileEdit:FC=()=>{
     })
     
 
-    const {mutateAsync}=useMutation('update profile', (body:IUserFields)=>UserService.updateProfile(body),{
+    const {mutateAsync}=useMutation('update profile', 
+        (body:IUserFields)=>UserService.updateProfile(body),{
         onError:(error)=>notification.error({
             message: errorCatch(error)
-        })
+        }),
+        onSuccess:async()=>{
+            notification.success({
+                message:'Профиль успешно обновлен'
+            })
+            await refetch()
+        }
     })
 
     const onFinish = async (values: IUserFields) => {
-        await mutateAsync(values)
+        await mutateAsync({...values, avatarPath:image.url, birthDate:moment(values.birthDate).format('DD.MM.YYYY')})
     };
     
     const onFinishFailed = (errorInfo: any) => {
@@ -80,7 +87,12 @@ const ProfileEdit:FC=()=>{
                         </Form.Item>
 
                         <Form.Item>
-                            <UploadField onChange={setImage} Button={<Button icon={<UploadOutlined/>}>Нажмите для загрузки</Button>}/>
+                            <UploadField onChange={setImage} Button={
+                                <div className="ant-btn ant-btn-default">
+                                    <UploadOutlined/>
+                                    <span>Нажмите для загрузки</span>
+                                </div>}
+                            />
                             {image?.url && <Avatar src={image.url} alt={image.name} size={120} style={{marginBottom:10}}/>}
                         </Form.Item>
                         

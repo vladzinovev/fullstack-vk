@@ -3,7 +3,7 @@ import { IUser } from "@/types/user.interface";
 import { Avatar } from "antd";
 import Link from "next/link";
 import { FC } from "react"
-import { time2TimeAgo } from "../../utils/converterData";
+import { time2TimeAgo } from "../../../utils/converterData";
 
 const UserInfo:FC<{user:IUser, postDate?:string}>=({user, postDate})=>{
     return (

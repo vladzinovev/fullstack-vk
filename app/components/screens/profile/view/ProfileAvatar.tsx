@@ -43,7 +43,7 @@ const ProfileAvatar:FC<{profile:IUser}>=({profile})=>{
                     <Button type='primary'>Написать сообщение</Button>
                 </>
             } */}
-            <Button type='dashed' style={{margin:'10px 0'}} disabled={isMyProfile || isExistsFriend}
+            <Button type='dashed' style={{margin:'10px 0'}} disabled={isMyProfile}
                 onClick={()=> mutate()}
             >
                 {isExistsFriend ? 'Удалить из друзей' : 'Добавить в друзья'}

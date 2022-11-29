@@ -30,7 +30,7 @@ const Search:FC=()=>{
                     {isLoading?(
                         <Skeleton/>
                     ):data?.length ? (
-                        data.map(user=>(<UserCard user={user} key={user._id} hideResult={hideResult/>))
+                        data.map(user=>(<UserCard user={user} key={user._id} hideResult={hideResult}/>))
                     ):(
                         <div>Пользователей не найдено</div>
                     )}

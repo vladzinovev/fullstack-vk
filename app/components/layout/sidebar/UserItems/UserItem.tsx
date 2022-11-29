@@ -3,6 +3,7 @@ import { Avatar } from "antd";
 import Link from "next/link";
 import { FC } from "react"
 
+
 const UserItem:FC<{user:IUser}>=({user})=>{
     return(
         <Link

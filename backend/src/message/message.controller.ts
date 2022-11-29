@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, UsePipes, ValidationPipe } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Query, UsePipes, ValidationPipe } from "@nestjs/common";
 import { Types } from "mongoose";
 import { Auth } from "src/auth/auth.decorators";
 import { IdValidationPipe } from "src/pipes/id.validation.pipe";
@@ -34,7 +34,7 @@ export class MessageController{
     @Auth()
     async deleteMessage(
         @Param('id',IdValidationPipe) id:Types.ObjectId,
-        @Body() {conversationId}:{conversationId:string}
+        @Query('conversationId') conversationId:string
     ){
         return this.messageService.delete(id,conversationId)
     }

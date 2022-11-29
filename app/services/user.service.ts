@@ -1,4 +1,4 @@
-import { IUser } from "@/types/user.interface"
+import { IUser, IUserFields } from "@/types/user.interface"
 import { axiosAuth, axiosClassic } from "api/interceptors"
 
 //переписываем с БД
@@ -15,11 +15,11 @@ export const UserService={
         return axiosAuth.get<IUser>(`/user/profile`)
     },
 
-    async updateProfile(){
-        return axiosAuth.put<IUser>(`/user/profile`)
+    async updateProfile(body:IUserFields){
+        return axiosAuth.put<IUser>(`/user/profile`,body)
     },
 
-    async togglefriend(friendId:string){
+    async toggleFriend(friendId:string){
         return axiosClassic.patch<boolean>(`/user/${friendId}`)
     },
 
