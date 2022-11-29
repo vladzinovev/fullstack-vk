@@ -14,6 +14,6 @@ export interface IMessageFields{
 }
 
 export interface IConversation{
-    id:string
+    _id:string
     messages:IMessage[]
 }

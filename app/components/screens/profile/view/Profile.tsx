@@ -1,7 +1,9 @@
 import Layout from "@/components/layout/Layout";
+import { useProfileById } from "@/hooks/useProfileById";
 import { UserService } from "@/services/user.service";
 import { IUser } from "@/types/user.interface";
 import { Card, Col, Row, Spin } from "antd";
+import { useRouter } from "next/router";
 import { FC } from "react"
 import { useQuery } from "react-query";
 import ProfileAvatar from "./ProfileAvatar";
@@ -9,9 +11,10 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import ProfilePosts from "./ProfilePosts";
 
 const Profile:FC=()=>{
-    const {isLoading,data}=useQuery('get profile', ()=>UserService.getProfile(),{
-        select:({data})=>data
-    })
+    const {query}=useRouter()
+    const userId=query?.id
+    
+    const {isLoading,data}=useProfileById(userId)
     return (
         <Layout title={data?.name || ''}>
             <Card bordered={false} bodyStyle={{padding:'1rem 0'}}>
