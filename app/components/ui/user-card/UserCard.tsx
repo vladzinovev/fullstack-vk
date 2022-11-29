@@ -23,4 +23,5 @@ const UserCard:FC<{user:IUser, hideResult?:()=>void}>=({user, hideResult})=>{
     )
 }
 
+
 export default UserCard;

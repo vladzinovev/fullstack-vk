@@ -9,16 +9,16 @@ import ListItem from "./ListItem";
 import styles from './Sidebar.module.scss';
 
 const User=()=>{
-    const {user,setUser}=useAuth();
+    const {setUser}=useAuth();
     const {data}= useProfile();
     return(
         <Card className={styles.card}>
             <Row gutter={[5,5]}>
                 <Col span={5}>
-                    <Avatar alt='' src={user?.avatarPath} size={'large'}/>
+                    <Avatar alt='' src={data?.avatarPath} size={'large'}/>
                 </Col>
                 <Col span={19} style={{display:'flex', alignItems:'center'}}>
-                    <div>{user?.name}</div>
+                    <div>{data?.name}</div>
                 </Col>
             </Row>
 

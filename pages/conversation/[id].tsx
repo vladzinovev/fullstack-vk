@@ -1,4 +1,4 @@
-import Conversation from '@/components/screens/conversation/[userToId]';
+import Conversation from '@/components/screens/conversation/Conversation';
 import { NextPage } from 'next'
 
 const ConversationPage:NextPage=()=> {

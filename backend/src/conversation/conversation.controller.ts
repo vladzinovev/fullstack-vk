@@ -4,6 +4,7 @@ import { Auth } from "src/auth/auth.decorators";
 import { MessageDto } from "src/message/message.dto";
 import { IdValidationPipe } from "src/pipes/id.validation.pipe";
 import { CurrentUser } from "src/user/decorators/user.decorator";
+import { ConversationDto } from "./conversation.dto";
 import { ConversationService } from "./conversation.service";
 
 @Controller('conversation')
@@ -21,7 +22,13 @@ export class ConversationController{
     @HttpCode(200)
     @Post()
     @Auth()
-    async createConversation(){
-        return this.conversationService.create()
+    async createConversation(
+        @Body() {withUserId}:ConversationDto,
+        @CurrentUser('_id') currentUserId:Types.ObjectId
+    ){
+        return this.conversationService.create(
+            currentUserId,
+            new Types.ObjectId(withUserId)
+        )
     }
 }

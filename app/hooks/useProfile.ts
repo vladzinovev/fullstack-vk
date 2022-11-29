@@ -4,8 +4,8 @@ import { AxiosResponse } from "axios"
 import { useQuery } from "react-query"
 
 export const useProfile=(successCallback:(data:AxiosResponse<IUser,any>)=>void)=>{
-    const {isLoading,data, refetch}=useQuery
-        ('get profile', 
+    const {isLoading,data, refetch}=useQuery(
+        'get profile', 
         ()=>UserService.getProfile(),
         successCallback ? {
             onSuccess:successCallback

@@ -6,6 +6,8 @@ import { useAuth } from "@/hooks/useAuth"
 import { useProfile } from "@/hooks/useProfile"
 import { useMutation } from "react-query"
 import { UserService } from "@/services/user.service"
+import { ConversationService } from "@/services/conversation.service"
+import { useRouter } from "next/router"
 
 const ProfileAvatar:FC<{profile:IUser}>=({profile})=>{
     const {user}=useAuth()
@@ -25,6 +27,19 @@ const ProfileAvatar:FC<{profile:IUser}>=({profile})=>{
             }
         }
     )
+
+    const {push} =useRouter()
+
+    const {mutate:createConversation} = useMutation(
+        'create conversation',
+        ()=>ConversationService.create(),
+        {
+            onSuccess:async ({data})=>{
+                await push(`/conversation/${data._id}?with=${profile._id}`)
+            }
+        }
+    )
+
     return(
         <Card style={{textAlign:'center'}}>
             {profile.avatarPath &&(
