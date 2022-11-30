@@ -1,7 +1,7 @@
 import { IUser } from "./user.interface"
 
 export interface IMessage{
-    id:string
+    _id:string
     text:string
     userFrom:IUser
     userTo:IUser

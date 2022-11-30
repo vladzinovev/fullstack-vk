@@ -8,8 +8,8 @@ export const ConversationService={
         return axiosAuth.get<IConversation>(`/conversation/${conversationId}`)
     },
 
-    async create(){
-        return axiosAuth.post<IConversation>(`/conversation`)
+    async create(withUserId:string){
+        return axiosAuth.post<IConversation>(`/conversation`,{withUserId})
     },
 
 }

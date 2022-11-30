@@ -32,7 +32,7 @@ const ProfileAvatar:FC<{profile:IUser}>=({profile})=>{
 
     const {mutate:createConversation} = useMutation(
         'create conversation',
-        ()=>ConversationService.create(),
+        ()=>ConversationService.create(profile._id),
         {
             onSuccess:async ({data})=>{
                 await push(`/conversation/${data._id}?with=${profile._id}`)
@@ -63,7 +63,7 @@ const ProfileAvatar:FC<{profile:IUser}>=({profile})=>{
             >
                 {isExistsFriend ? 'Удалить из друзей' : 'Добавить в друзья'}
             </Button>
-            <Button type='primary'>Написать сообщение</Button>
+            <Button type='primary' disabled={isMyProfile} onClick={()=>createConversation()}>Написать сообщение</Button>
             
         </Card>
     )
