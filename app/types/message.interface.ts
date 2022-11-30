@@ -11,6 +11,11 @@ export interface IMessageFields{
     text:string
     userToId:string
     conversationId:string
+    userFromId:string
+}
+
+export interface IDeleteMessageFields extends Pick<IMessageFields,'conversationId'>{
+    messageId:string
 }
 
 export interface IConversation{

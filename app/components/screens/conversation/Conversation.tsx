@@ -18,14 +18,16 @@ const Conversation:FC=()=>{
 
     const conversationId=query?.id
 
-    const {isLoading:isLoadingConversation,data}=useQuery(
+    const { conversation, sendMessage, removeMessage }=useChat(String(conversationId))
+    /* const {isLoading:isLoadingConversation,data}=useQuery(
         ['get conversation',conversationId], 
         ()=>ConversationService.get(String(conversationId)),
         {
             select:({data})=>data,
             enabled:!!conversationId
         }
-    )
+    ) */
+
     return (
         <Layout title='Диалог'>
             <div style={{margin:'1rem 0'}}>
@@ -34,7 +36,7 @@ const Conversation:FC=()=>{
                 </Card>
                 
                 
-                <Card id="scrollableDiv" style={{max-height:400, overflow:'auto',marginTop:'1rem'}}>
+                <Card id="scrollableDiv" style={{maxHeight:400, overflow:'auto',marginTop:'1rem'}}>
                     {isLoadingConversation ? <Skeleton/>:(
                         <List
                             dataSource={data?.messages}
