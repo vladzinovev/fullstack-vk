@@ -1,13 +1,15 @@
 import { Module } from "@nestjs/common";
 import { TypegooseModule } from "nestjs-typegoose";
 import { ConversationModel } from "src/conversation/conversation.model";
+import { ConversationService } from "src/conversation/conversation.service";
 import { MessageController } from "./message.controller";
+import { MessageGateway } from "./message.gateway";
 import { MessageModel } from "./message.model";
 import { MessageService } from "./message.service";
 
 @Module({
     controllers:[MessageController],
-    providers:[MessageService],
+    providers:[MessageService, MessageGateway,ConversationService],
     imports:[
         TypegooseModule.forFeature([
           {
@@ -25,6 +27,6 @@ import { MessageService } from "./message.service";
               }
             }
         ]),
-    ]
+    ], exports: [MessageService]
 })
 export class MessageModule{}

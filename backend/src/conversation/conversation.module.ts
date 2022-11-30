@@ -1,5 +1,6 @@
 import { Module } from "@nestjs/common";
 import { TypegooseModule } from "nestjs-typegoose";
+import { MessageModel } from "src/message/message.model";
 import { ConversationController } from "./conversation.controller";
 import { ConversationModel } from "./conversation.model";
 import { ConversationService } from "./conversation.service";
@@ -16,6 +17,14 @@ import { ConversationService } from "./conversation.service";
             }
           }
         ]),
-    ]
+        TypegooseModule.forFeature([
+          {
+            typegooseClass:MessageModel,
+            schemaOptions:{
+              collection:"Message",
+            }
+          }
+        ]),
+    ], exports: [ConversationService]
 })
 export class ConversationModule{}
