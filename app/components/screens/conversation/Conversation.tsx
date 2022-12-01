@@ -2,7 +2,7 @@ import Layout from "@/components/layout/Layout";
 import UserInfo from "@/components/ui/posts/post-item/UserInfo";
 import { useProfileById } from "@/hooks/useProfileById";
 import { IUser } from "@/types/user.interface";
-import { Avatar, Button, Card, Input, List} from "antd";
+import { Alert, Avatar, Button, Card, Input, List} from "antd";
 import { useRouter } from "next/router";
 import { FC, useState,KeyboardEvent } from "react"
 import cn from 'classnames'
@@ -19,7 +19,7 @@ const Conversation:FC=()=>{
 
     const conversationId=query?.id
 
-    const { conversation, sendMessage, removeMessage }=useChat(conversationId)
+    const { conversation, sendMessage, removeMessage , isConnected}=useChat(conversationId)
     /* const {isLoading:isLoadingConversation,data}=useQuery(
         ['get conversation',conversationId], 
         ()=>ConversationService.get(String(conversationId)),
@@ -50,6 +50,7 @@ const Conversation:FC=()=>{
                     <UserInfo user={userTo || {} as IUser}/>
                 </Card>
                 
+                {isConnected ? <Alert type='success' message='Connected'/> : <Alert type='error' message='Not connected'/>}
                 
                 <Card id="scrollableDiv" style={{maxHeight:400, overflow:'auto',marginTop:'1rem'}}>
                     
@@ -62,11 +63,11 @@ const Conversation:FC=()=>{
                                 style={isCurrentUserMessage(item,userTo?._id)?{justifyContent:'flex-end'}:{}}
                             >
                                 <List.Item.Meta 
-                                    avatar={<Avatar src={item.userTo.avatarPath}/>}
-                                    title={item.userTo.name}
+                                    avatar={<Avatar src={item.userFrom.avatarPath}/>}
+                                    title={item.userFrom.name}
                                     description={item.text}
                                     className={cn(styles.message,{
-                                        [styles.current]: isCurrentUserMessage(item,userTo?._id)
+                                        [styles.current]: isCurrentUserMessage(item,user?._id)
                                         
                                     })}
                                 />

@@ -1,4 +1,5 @@
-import {WebSocketGateway,WebSocketServer,SubscribeMessage,MessageBody} from '@nestjs/websockets';
+import {WebSocketGateway,WebSocketServer,SubscribeMessage,MessageBody, ConnectedSocket} from '@nestjs/websockets';
+import {Server, Socket} from 'socket.io';
 import { Types } from 'mongoose';
 import { ConversationService } from 'src/conversation/conversation.service';
 import { DeleteMessageDto } from './delete-message.dto';
@@ -12,7 +13,7 @@ export class MessageGateway{
         private readonly conversationService: ConversationService
     ){}
     @WebSocketServer()
-    server
+    server:Server
 
     @SubscribeMessage('message:get')
     async getConversation(@MessageBody('conversationId') conversationId:string){
@@ -20,7 +21,7 @@ export class MessageGateway{
         const conversation=await this.conversationService.byId(
             new Types.ObjectId(conversationId)
         )
-        this.server(conversationId).emit('conversation',conversation)
+        this.server.to(conversationId).emit('conversation',conversation)
     }
 
     @SubscribeMessage('message:add')
@@ -33,5 +34,26 @@ export class MessageGateway{
     async deleteMessage(@MessageBody() dto:DeleteMessageDto){
         await this.messageService.delete(new Types.ObjectId(dto.messageId),dto.conversationId)
         await this.getConversation(dto.conversationId)
+    }
+
+    @SubscribeMessage('joinRoom')
+    async handleRoomJoin(
+        @ConnectedSocket() client:Socket,
+        @MessageBody('conversationId') conversationId:string
+
+    ){
+        client.join(conversationId)
+        client.emit('joinedRoom',conversationId)
+        await this.getConversation(conversationId)
+    }
+
+    @SubscribeMessage('leaveRoom')
+    handleRoomLeave(
+        @ConnectedSocket() client:Socket,
+        @MessageBody('conversationId') conversationId:string
+
+    ){
+        client.leave(conversationId)
+        client.emit('leftRoom',conversationId)
     }
 }
