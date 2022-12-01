@@ -1,5 +1,5 @@
 import { useProfile } from "@/hooks/useProfile";
-import { Card, List, Skeleton } from "antd";
+import { Card, List, Skeleton, Typography } from "antd";
 import { useRouter } from "next/router";
 import { FC } from "react";
 import UserItem from "./UserItem";
@@ -14,6 +14,7 @@ const UserItems:FC=()=>{
 
     return(
         <Card className={styles.card}>
+            <Typography.Title level={5} style={{marginBottom:15}}>Мои друзья</Typography.Title>
             {isLoading?(
                 <Skeleton/>
             ):data?.friends?.length ? (
@@ -21,15 +22,6 @@ const UserItems:FC=()=>{
             ):(
                 <div>Друзей нет</div>
             )}
-            
-            <List itemLayout='vertical'> 
-                <ListItem item={{
-                    title:'Сообщение',
-                    icon:MessageOutlined,
-                    link:'./conversations',
-                }}/>
-                
-            </List>
 
         </Card>
     )

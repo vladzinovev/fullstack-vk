@@ -1,4 +1,5 @@
 import { IUser } from "@/types/user.interface";
+import { CheckCircleTwoTone } from "@ant-design/icons";
 import { Avatar } from "antd";
 import Link from "next/link";
 import { FC } from "react"
@@ -31,7 +32,12 @@ const UserItem:FC<{user:IUser}>=({user})=>{
                     <Avatar src={user.avatarPath} alt='' size={46}/>
                     
                 </div>
-                <span style={{fontSize:14}}>{user.name}</span>
+                <span style={{fontSize:14}}>
+                    {user.name}
+                    {user.isVerified && (
+                        <CheckCircleTwoTone style={{color:'#5B9CE6', opacity:'0.8', marginLeft:5}}/>
+                    )}
+                </span>
             </a>
         
         </Link>

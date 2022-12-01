@@ -1,7 +1,7 @@
 import { useAuth } from "@/hooks/useAuth";
 import { useProfile } from "@/hooks/useProfile";
 import { AuthService } from "@/services/auth/auth.service";
-import { EditOutlined } from "@ant-design/icons";
+import { CheckCircleTwoTone, EditOutlined } from "@ant-design/icons";
 import { Avatar, Button, Card, Col, List, Row } from "antd";
 
 import ListItem from "./ListItem";
@@ -18,7 +18,12 @@ const User=()=>{
                     <Avatar alt='' src={data?.avatarPath} size={'large'}/>
                 </Col>
                 <Col span={19} style={{display:'flex', alignItems:'center'}}>
-                    <div>{data?.name}</div>
+                    <div>
+                        {data?.name}
+                        {data?.isVerified && (
+                        <CheckCircleTwoTone style={{color:'#5B9CE6', opacity:'0.8', marginLeft:5}}/>
+                    )}
+                </div>
                 </Col>
             </Row>
 
