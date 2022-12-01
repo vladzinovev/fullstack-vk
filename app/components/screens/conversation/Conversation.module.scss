@@ -1,5 +1,10 @@
+.item{
+    position: relative; 
+}
+
 .message{
     max-width: 20%;
+    
     >div:last-child{
         background-color: #f7f7f7;
         border-radius: 0 5px 5px 5px;

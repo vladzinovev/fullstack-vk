@@ -14,6 +14,7 @@ export const useChat = (conversationId:string) => {
     const [socket,setSocket]=useState<Socket<DefaultEventsMap,DefaultEventsMap>|null>(null)
 
     useEffect(() => {
+        if(!conversationId) return
     // создаем экземпляр сокета, передаем ему адрес сервера
     // и записываем объект с названием комнаты в строку запроса "рукопожатия"
     // socket.handshake.query.roomId
@@ -32,7 +33,7 @@ export const useChat = (conversationId:string) => {
         if(!socket) return
 
         // отправляем запрос на получение сообщений
-        socket.emit('message:get')
+        socket.emit('message:get',{conversationId})
 
         // обрабатываем получение сообщений
         socket.on('conversation', conversation=>{
@@ -52,7 +53,7 @@ export const useChat = (conversationId:string) => {
 
     // функция удаления сообщения по id
     const removeMessage = (body:IDeleteMessageFields) => {
-        socket?.emit('message:remove', body)
+        socket?.emit('message:delete', body)
     }
 
 

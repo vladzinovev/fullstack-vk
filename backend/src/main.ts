@@ -7,18 +7,9 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api')
   await app.listen(4200);
-
-  app.use(
-    session({
-      cookie: {
-        maxAge: 86400000,
-      },
-      secret: 'dahdgasdjhsadgsajhdsagdhjd',
-      resave: false,
-      saveUninitialized: false,
-    }),
-  );
-  app.use(passport.initialize());
-  app.use(passport.session());
+  app.enableCors({
+    origin:'http://localhost:3000',
+    methods:['GET','POST']
+  });
 }
 bootstrap();

@@ -1,15 +1,16 @@
 import Layout from "@/components/layout/Layout";
 import UserInfo from "@/components/ui/posts/post-item/UserInfo";
 import { useProfileById } from "@/hooks/useProfileById";
-import { ConversationService } from "@/services/conversation.service";
 import { IUser } from "@/types/user.interface";
-import { Avatar, Card, Input, List, Skeleton } from "antd";
+import { Avatar, Button, Card, Input, List} from "antd";
 import { useRouter } from "next/router";
-import { FC } from "react"
-import { useQuery } from "react-query";
+import { FC, useState,KeyboardEvent } from "react"
 import cn from 'classnames'
 import styles from './Conversation.module.scss';
 import { isCurrentUserMessage } from "./conversation.utils";
+import { useChat } from "./useChat";
+import { useAuth } from "@/hooks/useAuth";
+import { DeleteOutlined } from "@ant-design/icons";
 
 const Conversation:FC=()=>{
     const {query}=useRouter()
@@ -28,6 +29,20 @@ const Conversation:FC=()=>{
         }
     ) */
 
+    const [message, setMessage] =useState('');
+    const {user}=useAuth();
+    const addMessageHandler = async (e:KeyboardEvent<HTMLInputElement>)=>{
+        if(e.key==='Enter'){
+            sendMessage({conversationId:String(conversationId),text: message, userFromId:String(user?._id),userToId:String(userTo?._id)})
+        }
+    }
+    const removeMessageHandler = async (messageId:string)=>{
+        removeMessage({
+            conversationId:String(conversationId),
+            messageId
+        })
+    }
+
     return (
         <Layout title='Диалог'>
             <div style={{margin:'1rem 0'}}>
@@ -37,30 +52,47 @@ const Conversation:FC=()=>{
                 
                 
                 <Card id="scrollableDiv" style={{maxHeight:400, overflow:'auto',marginTop:'1rem'}}>
-                    {isLoadingConversation ? <Skeleton/>:(
-                        <List
-                            dataSource={data?.messages}
-                            renderItem={item=>(
-                                <List.Item key={item._id} 
-                                    style={isCurrentUserMessage(item,userTo?._id)?{justifyContent:'flex-end'}:{}}
-                                >
-                                    <List.Item.Meta 
-                                        avatar={<Avatar src={item.userTo.avatarPath}/>}
-                                        title={item.userTo.name}
-                                        description={item.text}
-                                        className={cn(styles.message,{
-                                            [styles.current]: isCurrentUserMessage(item,userTo?._id)
-                                            
-                                        })}
-                                    />
-                                    <div>Content</div>
-                                </List.Item>
-                            )}
-                        />
-                    ) }
+                    
+                    <List
+                        dataSource={conversation.messages}
+                        renderItem={item=>(
+                            <List.Item 
+                                key={item._id} 
+                                className={styles.item}
+                                style={isCurrentUserMessage(item,userTo?._id)?{justifyContent:'flex-end'}:{}}
+                            >
+                                <List.Item.Meta 
+                                    avatar={<Avatar src={item.userTo.avatarPath}/>}
+                                    title={item.userTo.name}
+                                    description={item.text}
+                                    className={cn(styles.message,{
+                                        [styles.current]: isCurrentUserMessage(item,userTo?._id)
+                                        
+                                    })}
+                                />
+                                    {isCurrentUserMessage(item,userTo?._id) && 
+                                        <Button 
+                                            type='text' 
+                                            style={{position:'absolute', bottom:10, right:47, opacity:0.5}}
+                                            title='Удалить пост'
+                                            onClick={()=>removeMessageHandler(item._id)}
+                                        >
+                                            <DeleteOutlined style={{color:'#F8466E'}}/>
+                                        </Button>
+                                    }
+                                    
+                            </List.Item>
+                        )}
+                    />
+                    
                     
                 </Card>
-                <Input placeholder="Введите сообщение"/>
+                <Input 
+                    placeholder="Введите сообщение" 
+                    value={message} 
+                    onChange={e=>setMessage(e.target.value)}
+                    onKeyPress={addMessageHandler}
+                />
             </div>
         </Layout>
     )
