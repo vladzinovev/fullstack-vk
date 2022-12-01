@@ -6,8 +6,10 @@ import { useDebounce } from "../../../../hooks/useDebounce";
 
 export const useSearch=()=>{
     const visible = useOutside(false);
+
     const [searchTerm, setSearchTerm] =useState('');
     const debounceSearch=useDebounce(searchTerm,500);
+    
     const {isLoading,data} = useQuery(
         ['search videos', debounceSearch],
         ()=>UserService.findUsers(debounceSearch),
