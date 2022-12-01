@@ -19,7 +19,7 @@ const Conversation:FC=()=>{
 
     const conversationId=query?.id
 
-    const { conversation, sendMessage, removeMessage }=useChat(String(conversationId))
+    const { conversation, sendMessage, removeMessage }=useChat(conversationId)
     /* const {isLoading:isLoadingConversation,data}=useQuery(
         ['get conversation',conversationId], 
         ()=>ConversationService.get(String(conversationId)),
