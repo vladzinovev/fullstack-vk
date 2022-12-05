@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAA;EACD,aAAa,EAAC,MAAO;CACxB",
+    "sources": [
+        "../posts/Post.module.scss"
+    ],
+    "names": [],
+    "file": "Post.module.css"
+}

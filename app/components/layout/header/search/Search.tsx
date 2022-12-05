@@ -2,7 +2,7 @@ import { useOutside } from "@/hooks/useOutside";
 import { useSearch } from "@/components/layout/header/search/useSearch";
 import { SearchOutlined } from "@ant-design/icons";
 import { FC, useState } from "react"
-import styles from '../Header.module.css';
+import styles from '../Header.module.scss';
 import { Card, Skeleton } from "antd";
 import UserCard from "@/components/ui/user-card/UserCard";
 import cn from 'classnames';

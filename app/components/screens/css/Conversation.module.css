@@ -1,0 +1,27 @@
+.item {
+  position: relative;
+}
+
+.message {
+  max-width: 20%;
+}
+
+.message > div:last-child {
+  background-color: #f7f7f7;
+  border-radius: 0 5px 5px 5px;
+  padding: 0.7rem;
+}
+
+.message.current > div:first-child {
+  margin-right: 0;
+  margin-left: 16px;
+  -webkit-box-ordinal-group: 3;
+      -ms-flex-order: 2;
+          order: 2;
+}
+
+.message.current > div:last-child {
+  border-radius: 5px 0 5px 5px;
+  background-color: #eaf4ff;
+}
+/*# sourceMappingURL=Conversation.module.css.map */

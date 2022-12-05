@@ -1,0 +1,20 @@
+.form {
+  margin: 6rem auto 0;
+  max-width: 30%;
+}
+
+.form > div > button {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.form > div > button > span:first-child {
+  display: block !important;
+  width: 25px !important;
+}
+
+.form > div > button > span:last-child {
+  margin-left: 12px;
+}
+/*# sourceMappingURL=Auth.module.css.map */

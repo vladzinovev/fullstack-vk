@@ -3,7 +3,7 @@ import { Card, Image } from "antd";
 import { FC, useState } from "react"
 import UserInfo from "./UserInfo";
 import { useQuery } from "react-query"
-import styles from './Post.module.scss';
+import styles from '../Post.module.scss';
 import PostActions from "./post-actions/PostActions";
 import { CommentService } from "@/services/comment.service";
 import PostComments from "./post-actions/post-comments/PostComments";

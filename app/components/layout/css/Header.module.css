@@ -1,0 +1,67 @@
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: #5277a3;
+  padding: 1.2rem 3rem 0.6rem;
+}
+
+.header .image-wrapper {
+  width: 25%;
+}
+
+.header .image-wrapper > imh {
+  width: 30px;
+  height: 30px;
+}
+
+.header .wrapper {
+  margin-left: 16px;
+  width: calc(75% - 16px);
+  border-radius: 30px;
+  background-color: #2c4a76;
+  position: relative;
+  -webkit-transition: border-radius 0.4s ease-in-out;
+  transition: border-radius 0.4s ease-in-out;
+}
+
+.header .wrapper > input::-webkit-input-placeholder {
+  color: #607d9f;
+}
+
+.header .wrapper > input:-ms-input-placeholder {
+  color: #607d9f;
+}
+
+.header .wrapper > input::-ms-input-placeholder {
+  color: #607d9f;
+}
+
+.header .wrapper > input::placeholder {
+  color: #607d9f;
+}
+
+.header .wrapper > span {
+  color: #607d9f;
+  position: absolute;
+  top: 12px;
+  left: 20px;
+  font-size: 20px;
+}
+
+.result {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  z-index: 10;
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06);
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06);
+}
+/*# sourceMappingURL=Header.module.css.map */
